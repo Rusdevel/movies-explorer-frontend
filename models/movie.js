@@ -6,6 +6,10 @@ const movieSchema = new mongoose.Schema({
     type: String, // имя — это строка
     required: true,
   },
+  duration: {
+    type: String, // имя — это строка
+    required: true,
+  },
   director: {
     type: String, // имя — это строка
     required: true,
@@ -52,26 +56,15 @@ const movieSchema = new mongoose.Schema({
     },
   },
 
-  link: {
-    type: String,
-    required: true,
-    validate: {
-      validator(value) {
-        return validator.isURL(value, { require_protocol: true });
-      },
-      message: 'Ссылка некоректная',
-    },
-  },
   // _id пользователя, который сохранил фильм
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
   // id фильма, который содержится в ответе сервиса MoviesExplorer
-  /* movieId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'movie',
-  }, */
+  movieId: {
+    type: String,
+  },
   nameRU: { // у пользователя есть имя — опишем требования к имени в схеме:
     type: String, // имя — это строка
     required: true, // оно должно быть у каждого пользователя, так что имя — обязательное поле
