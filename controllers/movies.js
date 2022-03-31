@@ -5,11 +5,15 @@ const ForbiddenError = require('../errors/ForbiddenError');
 
 // показать все фильмы
 const getMovies = (req, res, next) => {
-  Movie.find({})
-    .then((cards) => {
-      res.status(200).send(cards);
+  const owner = req.user._id;
+  // console.log('owner', owner);
+  Movie.find({ owner })
+    .then((movies) => {
+      // console.log('movies', movies);
+      res.status(200)
+        .send(movies);
     })
-    .catch((err) => next(err));
+    .catch(next);
 };
 // создаем фильм
 const createMovie = (req, res, next) => {

@@ -4,10 +4,12 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors, celebrate, Joi } = require('celebrate');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const usersRoute = require('./routes/users');
 const movieRoute = require('./routes/movies');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
+const NotFoundError = require('./errors/NotFoundError');
 
 // Слушаем 3000 порт
 const { PORT = 3000 } = process.env;
@@ -23,6 +25,7 @@ mongoose.connect('mongodb://localhost:27017/bitfilmsdb', (err) => {
 
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(requestLogger); // подключаем логгер запросов
 // аутентификация пользователя
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -30,6 +33,7 @@ app.post('/signin', celebrate({
     password: Joi.string().required(),
   }),
 }), login);
+
 // создание пользователя
 app.post('/signup', celebrate({
   body: Joi.object().keys({
@@ -42,6 +46,12 @@ app.post('/signup', celebrate({
 app.use(auth);
 app.use('/', usersRoute);
 app.use('/', movieRoute);
+
+app.use(errorLogger); // подключаем логгер ошибок
+
+app.all('*', (req, res, next) => {
+  next(new NotFoundError('ресурс не найден.'));
+});
 
 app.use(errors()); // ошибки от celebrate
 

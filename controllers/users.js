@@ -57,6 +57,7 @@ const login = (req, res, next) => {
       next(new AuthError(`необходимо авторизоваться: ${err.message}`));
     });
 };
+
 // возвращаем инфу о пользователе
 const getUser = (req, res, next) => {
   User.findById(req.user._id)
