@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { celebrate, Joi } = require('celebrate');
+const { userValidate } = require('../middlewares/validation');
 const {
   updateUser, getUser,
 } = require('../controllers/users');
@@ -8,12 +8,6 @@ const {
 router.get('/users/me', getUser);
 
 // изменение данных пользователя
-router.patch('/users/me', celebrate({
-  // валидация запроса
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    email: Joi.string().required().email(),
-  }),
-}), updateUser);
+router.patch('/users/me', userValidate, updateUser);
 
 module.exports = router;
