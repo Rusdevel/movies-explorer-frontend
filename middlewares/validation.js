@@ -32,9 +32,10 @@ const validateMovies = celebrate({
   body: Joi.object().keys({
     country: Joi.string().min(2).max(30).required(),
     director: Joi.string().min(2).max(30).required(),
-    duration: Joi.string().min(2).max(30).required(),
+    duration: Joi.number().required(),
     year: Joi.string().min(2).max(30).required(),
     description: Joi.string().min(2).max(30).required(),
+    movieId: Joi.number().required(),
     image: Joi.string().required().custom((value) => {
       if (!isURL(value)) {
         throw new Error('Ссылка некоректная');

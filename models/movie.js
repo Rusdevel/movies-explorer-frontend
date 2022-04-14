@@ -7,7 +7,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   duration: {
-    type: String, // имя — это строка
+    type: Number, // имя — это строка
     required: true,
   },
   director: {
@@ -64,6 +64,7 @@ const movieSchema = new mongoose.Schema({
   // id фильма, который содержится в ответе сервиса MoviesExplorer
   movieId: {
     type: Number,
+    required: true,
   },
   nameRU: { // у пользователя есть имя — опишем требования к имени в схеме:
     type: String, // имя — это строка

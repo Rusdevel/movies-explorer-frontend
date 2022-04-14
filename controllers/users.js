@@ -5,6 +5,7 @@ const AuthError = require('../errors/AuthError');
 const ConflictEmailError = require('../errors/ConflictEmailError');
 const NotFoundError = require('../errors/NotFoundError');
 const RequestError = require('../errors/RequestError');
+const ServerError = require('../errors/ServerError');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -74,19 +75,16 @@ const updateUser = (req, res, next) => {
   const userId = req.user._id;
   const { name, email } = req.body;
   return User.findByIdAndUpdate(userId, { name, email }, { new: true, runValidators: true })
-    .orFail(new Error('NotFound'))
-    .then((user) => { res.status(200).send(user); })
-    // eslint-disable-next-line consistent-return
+    .then((user) => res.status(200).send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        throw new RequestError(
-          'Переданы некорректные данные',
-        );
+        next(new RequestError('Некорректные данные'));
+      } else if (err.name === 'MongoServerError' && err.code === 11000) {
+        next(new ConflictEmailError(`Указанная почта ${email} уже зарегистрирована`));
       } else {
-        next(err);
+        next(new ServerError('Ошибка на сервере'));
       }
-    })
-    .catch(next);
+    });
 };
 
 module.exports = {

@@ -36,24 +36,12 @@ const createMovie = (req, res, next) => {
     movieId,
     owner,
   })
-    .then((movie) => res.status(200).send({
-      country,
-      director: movie.director,
-      duration: movie.duration,
-      year: movie.year,
-      description: movie.description,
-      image: movie.image,
-      trailerLink: movie.trailerLink,
-      nameRU: movie.nameRU,
-      nameEN: movie.nameEN,
-      thumbnail: movie.thumbnail,
-      movieId: movie._id,
-    }))
+    .then((movie) => res.status(200).send(movie))
     .catch((err) => {
       if (err.nameRU === 'ValidationError') {
-        throw new RequestError(
+        next(new RequestError(
           'Переданы некорректные данные в методы создания фильма',
-        );
+        ));
       } else {
         next(err);
       }
@@ -72,15 +60,13 @@ const deleteMovie = (req, res, next) => {
       Movie.findByIdAndRemove(req.params.movieId)
         .then((movieId) => {
           if (!movieId) {
-            throw new NotFoundError('Фильм не найдена');
+            next(new NotFoundError('Фильм не найдена'));
           }
           return res.status(200).send({ message: 'фильм удален' });
         })
         .catch((err) => {
           if (err.name === 'CastError') {
-            throw new RequestError(
-              'Переданы некорректные данные',
-            );
+            next(new RequestError('Переданы некорректные данные'));
           } else {
             next(err);
           }
