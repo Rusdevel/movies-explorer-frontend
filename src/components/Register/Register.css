@@ -1,0 +1,177 @@
+.register {
+    min-width: 320px;
+}
+@media screen and (min-width: 768px) {
+    .register {
+        margin-top: 241px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .register {
+        margin-top: 81px;
+    }
+}
+
+.register__container {
+    margin: 39px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 260px;
+    align-items: center;
+}
+
+
+@media screen and (min-width: 768px) {
+    .register__container {
+        max-width: 396px;
+        align-items: start;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .register__container {
+        margin-top: 74px;
+    }
+}
+
+.register__title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 48px 0 71px 0;
+}
+
+@media screen and (min-width: 768px) {
+    .register__title {
+        text-align: start;
+        margin: 30px 0 35px 0;
+    }
+}
+
+.register__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.register__input-name {
+    font-size: 10px;
+    line-height: 12px;
+    color: #8B8B8B;
+    text-align: start;
+}
+
+.register__input {
+    width: 120px;
+    background-color: #202020;
+    border: 0;
+}
+
+.register__input::placeholder {
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.register__subtitle {
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+}
+
+.register__box {
+    margin: 0 0 0 0;
+    padding: 0 0 28px 0;
+    border-bottom: 1px solid #424242;
+}
+
+@media screen and (min-width: 768px) {
+    .register__box {
+        margin: 0 0 0 0;
+        padding: 0 0 25px 0;
+
+    }
+}
+
+.register__box:last-of-type {
+    padding: 0 0 15px 0;
+}
+
+.register__input-name {
+    margin: 10px 0 0 0;
+}
+
+.register__button {
+    background-color: #4285F4;
+    color: white;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    padding: 0 0 0 0;
+    margin: 221px auto 0 auto;
+    max-width: 260px;
+    height: 45px;
+    border-radius: 3%;
+    cursor: pointer;
+    min-width: 260px;
+    border: 1px #424242 solid;
+}
+
+@media screen and (min-width: 768px) {
+    .register__button {
+        text-align: center;
+        margin: 136px auto 0 auto;
+        min-width: 396px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+
+.register__footer {
+    display: flex;
+    margin: 14px 0 0 0;
+    justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+    .register__footer {
+        margin: 17px 0 232px 0;
+    }
+}
+
+.register__text {
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: #8B8B8B;
+    margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .register__text {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+
+.register__link {
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: #4285F4;
+    margin-left: 5px;
+}
+
+@media screen and (min-width: 768px) {
+    .register__link {
+        font-size: 14px;
+        line-height: 14px;
+        margin-left: 5px;
+    }
+}
