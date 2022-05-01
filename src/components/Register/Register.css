@@ -66,13 +66,16 @@
 }
 
 .register__input {
-    width: 120px;
-    background-color: #202020;
+    width: 396px;
+    height: 46px;
+    border-radius: 8px;
+    background-color: #F9F9F9;
+    ;
     border: 0;
 }
 
 .register__input::placeholder {
-    color: #FFFFFF;
+    color:#000000;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -87,7 +90,7 @@
 .register__box {
     margin: 0 0 0 0;
     padding: 0 0 28px 0;
-    border-bottom: 1px solid #424242;
+    
 }
 
 @media screen and (min-width: 768px) {
