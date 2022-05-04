@@ -21,5 +21,4 @@ function MoviesCard(props) {
         </section>
     )
 }
-
 export default MoviesCard;
