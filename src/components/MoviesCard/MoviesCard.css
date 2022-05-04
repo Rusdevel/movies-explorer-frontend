@@ -1,0 +1,128 @@
+.movies-card {
+    min-width: 320px;
+    margin-bottom: 17px;
+    display: flex;
+    flex-direction: column;
+}
+@media screen and (min-width: 768px) {
+    .movies-card {
+        margin-bottom: 0;
+    }
+}
+
+.movies-card__container {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+    .movies-card__container {
+        max-width: 339px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .movies-card__container {
+        max-width: 364px;
+    }
+}
+
+
+.movies-img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+    .movies-card__group {
+        margin: 9px auto 0 auto;
+        max-width: 272px;
+        display: flex;
+        justify-content: space-between;
+        height: 18px;
+    }
+
+@media screen and (min-width: 768px) {
+    .movies-card__group {
+        margin-top: 12px;
+        max-width: 316px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .movies-card__group {
+        margin-top: 15px;
+        max-width: 338px;
+    }
+}
+
+.movies-card__title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: black;
+    margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .movies-card__title {
+        font-size: 13px;
+    }
+}
+
+.movies-card__like {
+    background-image: url("../../../src/images/disLike.svg");
+    background-repeat: no-repeat;
+    width: 23px;
+    height: 12px;
+    background-position: center;
+    border: hidden;
+    align-self: center;
+    margin-left: auto;
+    outline: none;
+    cursor:pointer;
+    background-color: transparent;
+    transition: 0.1s linear .1s;
+}
+
+.movies-card__like_active {
+    background-image: url("../../../src/images/like.svg");
+}
+
+.movies-card__delete {
+    width: 13px;
+    height: 8px;
+    background-image: url("../../../src/images/delete.svg");
+    background-repeat: no-repeat;
+    border: hidden;
+    align-self: center;
+    margin-left: auto;
+    outline: none;
+    cursor:pointer;
+    background-color: transparent;
+    transition: 0.1s linear .1s;
+}
+
+@media screen and (min-width: 768px) {
+    .movies-card__like {
+        width: 38px;
+    }
+}
+
+
+.movies-card__subtitle {
+    font-size: 10px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+    color: #8B8B8B;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+@media screen and (min-width: 768px) {
+    .movies-card__subtitle {
+        font-size: 11px;
+        line-height: 13px;
+    }
+}

@@ -1,12 +1,16 @@
-function SavedMovies () {
+import React from 'react';
+import Footer from "../Footer/Footer";
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+
+function SavedMovies() {
     return (
-      <div className="dashboard">
-        <h2>Это сохраненные фильмы!</h2>
-        <p>
-          #1 среди авторов обзоров на эмодзи в этом году!
-        </p>
-      </div>
+        <main className='main'>
+            <SearchForm/>
+            <MoviesCardList/>
+            <Footer/>
+        </main>
     )
-  }
+}
 
 export default SavedMovies;

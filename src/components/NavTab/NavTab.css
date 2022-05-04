@@ -1,0 +1,48 @@
+.navTab {
+   background-color: #000000;
+   min-width: 320px;
+   height: 66px;
+}
+
+
+.navTab__link {
+    font-size: 11px;
+    line-height: 16px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+.navTab__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 53px;
+margin-right: 53px;
+height: 66px;
+}
+
+@media screen and (min-width: 768px) {
+    .navTab {
+        min-width: 768px;
+    }
+    .navTab__link {
+        font-size: 13px;
+    }
+    .navTab__container {
+        margin-left: 246px;
+margin-right: 246px;
+    }
+    }
+
+    @media screen and (min-width: 1280px) {
+        .navTab {
+            min-width: 1280px;
+        }
+        .navTab__link {
+            font-size: 13px;
+        }
+        .navTab__container {
+            margin-left: 502px;
+    margin-right: 502px;
+        }
+        }

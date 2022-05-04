@@ -48,7 +48,8 @@
     font-size: 12px;
     line-height: 15px;
     text-align: center;
-    border-bottom: 1px solid #424242;
+    border-bottom: 1px solid #A0A0A0;
+    color: #A0A0A0;
 }
 
 @media screen and (min-width: 768px) {
@@ -75,7 +76,8 @@
 }
 
 .footer__link {
-    color: #FFFFFF;
+    color: 
+    #000000;
     text-decoration: none;
     font-size: 12px;
     line-height: 26px;

@@ -16,7 +16,7 @@ function Login() {
                     <div className='register__box'>
                         <p className='register__input-name'>E-mail</p>
                         <input className='register__input' type='email' name='email'
-                               value={email || ''} placeholder='zaxarov@mail.ru' required/>
+                               value={email || ''} placeholder='ruslanbestaev77@yandex.ru' required/>
                     </div>
                     <div className='register__box'>
                         <p className='register__input-name'>Пароль</p>
