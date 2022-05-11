@@ -39,8 +39,8 @@
 }
 
 .movies-cardList__button {
-    background-color: #F9F9F9;
-    color: black;
+    background-color: #2F2F2F;
+    color: #FFFFFF;
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
@@ -53,6 +53,7 @@
     border-radius: 6px;
     cursor: pointer;
     min-width: 238px;
+    border: 0;
     
 }
 

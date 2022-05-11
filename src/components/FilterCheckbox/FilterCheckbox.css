@@ -3,7 +3,7 @@
     justify-content: space-between;
     flex-direction: row-reverse;
     max-width: 147px;
-    margin: 30px auto 50px auto;
+    margin: 30px auto 74px 14px;
 }
 @media screen and (min-width: 768px) {
     .filter-checkbox {
@@ -38,7 +38,7 @@
     opacity: 0;
 }
 .filter-checkbox__title {
-    color: black;
+    color: #FFFFFF;
     font-weight: normal;
     font-size: 11px;
     line-height: 18px;

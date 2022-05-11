@@ -3,6 +3,7 @@
     color: #FFFFFF;
     display: flex;
     justify-content: center;
+    background-color:  #202020;
 }
 
 .not-found__container {

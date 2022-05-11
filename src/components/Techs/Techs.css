@@ -1,7 +1,13 @@
 .techs {
     min-width: 320px;
     padding-bottom: 100px;
-    background-color: #F5F5F5;
+    background-color: #202020;
+   color: #FFFFFF;
+}
+
+.techs__header-title {
+    border-bottom: #000000
+    solid 1px;
 }
 
 .techs__container {
@@ -39,7 +45,7 @@
 
 .techs__list {
     height: 36px;
-    background-color: #E8E8E8;
+    background-color: #303030;
     border-radius: 10px;
     text-align: center;
     padding-top: 21px;
@@ -52,9 +58,6 @@
     .techs {
         padding-top: 1px;
         margin-bottom: 88px;
-    }
-    .techs__header-title {
-        margin: 80px 0 0 0;
     }
     .techs__box {
         grid-template-columns: repeat(7, 84px);
@@ -78,9 +81,6 @@
     .techs {
         padding-top: 1px;
         margin-bottom: 96px;
-    }
-    .techs__header-title {
-        margin: 107px 0 0 0;
     }
     .techs__box {
         grid-template-columns: repeat(7, 90px);

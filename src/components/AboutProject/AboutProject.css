@@ -1,7 +1,8 @@
 .AboutProject {
-    background-color: #FFFFFF;
+    background-color: #202020;
     min-width: 320px;
     padding-bottom: 69px;
+    color: #FFFFFF;
 }
 
 .AboutProject__container {
@@ -17,7 +18,7 @@
     font-weight: 400;
     line-height: 22px;
     padding: 70px 0 28px;
-    border-bottom: #000000 solid 1px;
+    border-bottom: #DADADA solid 1px;
     margin: 0;
 }
 
@@ -44,13 +45,14 @@
 }
 
 .aboutProject__week {
-    background-color: #E8E8E8;
+    background-color: #303030;
     padding-top: 11px;
     padding-bottom: 11px;
     margin: 0;
 }
 .aboutProject__week:first-of-type {
     background-color: #2BE080;
+    color: #000000;
 }
 
 .aboutProject__footnote {

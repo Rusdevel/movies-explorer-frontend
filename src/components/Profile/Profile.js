@@ -1,12 +1,14 @@
 import React from 'react';
 import './Profile.css';
 import {Link} from "react-router-dom";
+import Navigation from "../Navigation/Navigation";
 
 
 function Profile() {
     const [name, email] = React.useState('')
     return (
         <section className='profile'>
+            <Navigation />
             <div className='profile__container'>
                 <h1 className='profile__title'>Привет, Руслан!</h1>
                 <form className='profile__form'>

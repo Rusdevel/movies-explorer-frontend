@@ -7,16 +7,18 @@ function MoviesCard(props) {
     return (
         <section className='movies-card'>
             <div className='movies-card__container'>
+            {pathname === "/movies" ? (
+                        <p className='movies-card__saved'>Сохранить</p>
+                    ) : (
+                        <button className='movies-card__delete '>X</button>
+                    )}
                 <img className='movies-img' src={props.url} alt={props.title}></img>
+                
                 <div className='movies-card__group'>
                     <h2 className='movies-card__title'>{props.title}</h2>
-                    {pathname === "/movies" ? (
-                        <button className='movies-card__like'></button>
-                    ) : (
-                        <button className='movies-card__delete'></button>
-                    )}
+                    <p className='movies-card__subtitle'>{props.subtitle}</p>
                 </div>
-                <p className='movies-card__subtitle'>{props.subtitle}</p>
+                
             </div>
         </section>
     )
