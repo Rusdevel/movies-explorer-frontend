@@ -38,7 +38,7 @@
 
 .aboutProject__info {
     display: grid;
-    grid-template-columns: 100px 184px;
+    grid-template-columns: minmax(100px,220px) minmax(184px,912px);
     text-align: center;
     font-size:  11px;
     line-height: 13.31px;
@@ -72,9 +72,11 @@
     .AboutProject__block {
         display: flex;
         justify-content: space-between;
+        margin: 0 -20px;
     }
     .AboutProject__box {
-        width: 319px;
+        min-width: 319px;
+        margin: 0 20px;
     }
     
     .AboutProject__title {
@@ -99,7 +101,6 @@
     }
     
     .aboutProject__info {
-        grid-template-columns: 140px 528px;
         font-size:  14px;
         line-height: 16.94px;
     }
@@ -117,8 +118,9 @@
 
 @media screen and (min-width: 1280px) {
     .AboutProject {
-        min-width: 1280px;
+        max-width: 1350px;
         padding-bottom: 110px;
+        margin: 0 auto;
     }
     .AboutProject__container {
         margin: 0 70px
@@ -139,17 +141,8 @@
         line-height: 20px;
         margin-bottom: 110px;
     }
-    .aboutProject__info {
-        grid-template-columns: 228px 912px;
-    }
     .aboutProject__footnote {
         margin-top: 23px;
     }
     
-}
-
-@media screen and (min-width: 1500px) {
-    .aboutProject__info {
-        grid-template-columns: 410px 1000px;
-    }
 }

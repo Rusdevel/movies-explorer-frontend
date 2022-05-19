@@ -1,5 +1,6 @@
-import {Link, NavLink, useLocation} from "react-router-dom";
-import Logo from "../../images/logo.svg";
+import { NavLink, useLocation} from "react-router-dom";
+import LogoHeader from "../LogoHeader/LogoHeader";
+
 import Navigation from "../Navigation/Navigation";
 import './Header.css';
 
@@ -9,12 +10,12 @@ function Header (props) {
     return (
       <header className={isColorHead}>
         <div className="header__group">
-        <Link href="#" target="_blank"  rel="noopener noreferrer"><img className="logo" src={Logo}
-                                                           alt="логотип"/></Link>
-        {props.loggedIn && ( pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile') ? (
+        
+        { ( pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile') ? (
                         <Navigation />
                 ) : (
                     <>
+                    <LogoHeader/>
       <div className="header__container">
       <NavLink className="header__button" target="_blank" to="/signup">
                                 Регистрация

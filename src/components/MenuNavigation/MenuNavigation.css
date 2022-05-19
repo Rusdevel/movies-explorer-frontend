@@ -14,7 +14,8 @@
     width: 320px;
     height: 100%;
     z-index: 1;
-    background-color:  white;
+    background-color: #202020;
+    
 }
 
 @media screen and (min-width: 768px) {
@@ -47,7 +48,7 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
-    color: black;
+    color: #FFFFFF;
     text-decoration: none;
     padding-bottom: 24px;
 }
@@ -70,6 +71,7 @@
     left: 277px;
     right: 0;
     position: absolute;
+    color: #FFFFFF;
 }
 
 @media screen and (min-width: 768px) {

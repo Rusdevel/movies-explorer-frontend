@@ -15,8 +15,8 @@
     }
 }
 .search-form__container {
-    max-width: 292px;
-    margin: 0 auto;
+    min-width: 285px;
+    margin: 0 14px;
     display: flex;
     justify-content: space-between;
     padding: 6px;
@@ -27,13 +27,14 @@ border-radius: 8px;
 
 @media screen and (min-width: 768px) {
     .search-form__container {
-        max-width: 708px;
+        margin: 0 30px;
     }
 }
 
 @media screen and (min-width: 1280px) {
     .search-form__container {
         max-width: 1140px;
+        margin: 0 auto;
     }
 }
 

@@ -8,6 +8,10 @@
 .header-style {
     background-color: #202020;
 }
+.header__box-link {
+    display: flex;
+    align-items: center;
+}
 
 @media screen and (min-width: 768px) {
     .header {
@@ -25,10 +29,11 @@
 
 .header__group {
     height: 74px;
-    min-width: 320px;
+    min-width: 292px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+   margin: 0 auto;
 }
 
 
@@ -83,4 +88,65 @@
 .logo {
     width: 38px;
     height: 38px;
+}
+
+.header__nav-link {
+    font-size: 13px;
+    line-height: 18px;
+    text-decoration: none;
+    color: #FFFFFF;
+    margin-right: 16px;
+    display: none;
+}
+
+@media screen and (min-width: 1280px) {
+    .header__nav-link {
+        display: initial;
+        font-size: 13px;
+        line-height: 18px;
+        text-decoration: none;
+        color: #FFFFFF;
+        margin-right: 16px;
+    }
+}
+
+
+@media screen and (min-width: 1280px) {
+    .header__nav-link-style {
+        font-size: 13px;
+        line-height: 32px;
+        text-decoration: none;
+        color: #FFFFFF;
+        margin-right: 16px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .header__group-style {
+        min-width: 1153px;
+    }
+}
+
+.header__menu {
+    width: 40px;
+    height: 43px;
+    cursor: pointer;
+    background-image: url(../../images/icon__COLOR_icon-main.svg);
+    background-position: center;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+    .header__menu {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .header__menu {
+        display: none;
+    }
 }
