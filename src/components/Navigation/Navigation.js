@@ -14,10 +14,9 @@ function Navigation(props) {
     }
 
     return(
-        <header>
+        <div className='header__group header__group-style'>
             <MenuNavigation isMenuOpen={isMenuOpen}  handleToggleMenu={handleToggleMenu} />
             <>
-                <div className='header__group header__group-style'>
                 <LogoHeader/>
                     <div className='header__box-link'>
                     <Link to='/movies' className='header__nav-link'>Фильмы</Link>
@@ -27,11 +26,10 @@ function Navigation(props) {
                                                            alt="логотип"/></Link>
                     </div>
                     
-
                     <button className='header__menu'  onClick={handleToggleMenu}/>
-                </div>
+                
             </>
-        </header>
+        </div>
     )
 }
 export default Navigation;

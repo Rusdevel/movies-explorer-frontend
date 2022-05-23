@@ -14,7 +14,7 @@ function Header (props) {
         { ( pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile') ? (
                         <Navigation />
                 ) : (
-                    <>
+                    <div className="header__main">
                     <LogoHeader/>
       <div className="header__container">
       <NavLink className="header__button" target="_blank" to="/signup">
@@ -24,7 +24,7 @@ function Header (props) {
                                 Войти
                             </NavLink>
       </div>
-      </>
+      </div>
                 )}
   </div>
       </header>
