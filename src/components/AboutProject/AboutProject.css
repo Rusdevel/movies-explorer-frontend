@@ -1,0 +1,148 @@
+.AboutProject {
+    background-color: #202020;
+    min-width: 320px;
+    padding-bottom: 69px;
+    color: #FFFFFF;
+}
+
+.AboutProject__container {
+    margin: 0 18px
+}
+
+.AboutProject__block {
+    margin: 0;
+}
+
+.AboutProject__title {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    padding: 70px 0 28px;
+    border-bottom: #DADADA solid 1px;
+    margin: 0;
+}
+
+.AboutProject__subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    margin: 60px 0 16px;
+}
+
+.AboutProject__text {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 16px;
+    margin-bottom: 58px;
+}
+
+.aboutProject__info {
+    display: grid;
+    grid-template-columns: minmax(100px,220px) minmax(184px,912px);
+    text-align: center;
+    font-size:  11px;
+    line-height: 13.31px;
+}
+
+.aboutProject__week {
+    background-color: #303030;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    margin: 0;
+}
+.aboutProject__week:first-of-type {
+    background-color: #2BE080;
+    color: #000000;
+}
+
+.aboutProject__footnote {
+    color: #A0A0A0;
+    margin: 0;
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .AboutProject {
+        min-width: 768px;
+        padding-bottom: 90px;
+    }
+    .AboutProject__container {
+        margin: 0 50px
+    }
+    .AboutProject__block {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 -20px;
+    }
+    .AboutProject__box {
+        min-width: 319px;
+        margin: 0 20px;
+    }
+    
+    .AboutProject__title {
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 26.63px;
+        padding: 90px 0 23px;
+    }
+    
+    .AboutProject__subtitle {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24.2px;
+        margin: 70px 0 22px;
+    }
+    
+    .AboutProject__text {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+        margin-bottom: 93px;
+    }
+    
+    .aboutProject__info {
+        font-size:  14px;
+        line-height: 16.94px;
+    }
+    
+    .aboutProject__week {
+        padding-top: 9px;
+        padding-bottom: 9px;
+    }
+    
+    .aboutProject__footnote {
+        margin-top: 14px;
+    }
+    
+}
+
+@media screen and (min-width: 1280px) {
+    .AboutProject {
+        max-width: 1350px;
+        padding-bottom: 110px;
+        margin: 0 auto;
+    }
+    .AboutProject__container {
+        margin: 0 70px
+    }
+    .AboutProject__box {
+        width: 550px;
+    }
+    .AboutProject__title {
+        padding: 110px 0 23px;
+    }
+    
+    .AboutProject__subtitle {
+        margin: 70px 0 26px;
+    }
+    
+    .AboutProject__text {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 110px;
+    }
+    .aboutProject__footnote {
+        margin-top: 23px;
+    }
+    
+}
