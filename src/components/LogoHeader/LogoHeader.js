@@ -5,7 +5,7 @@ import './LogoHeader.css';
 
 function LogoHeader() {
     return(
-        <Link href="#" target="_blank"  rel="noopener noreferrer"><img className="LogoHeader" src={Logo}
+        <Link href="#" target="_blank" to="/signin" rel="noopener noreferrer" ><img className="LogoHeader" src={Logo}
                                                            alt="логотип"/></Link>
     )
 }

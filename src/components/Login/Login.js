@@ -17,12 +17,12 @@ function Login() {
                     <div className='register__box'>
                         <p className='register__input-name'>E-mail</p>
                         <input className='register__input' type='email' name='email'
-                               value={email || ''} placeholder='ruslanbestaev77@yandex.ru' required/>
+                            /*   value={email || ''} */ placeholder='ruslanbestaev77@yandex.ru' required/>
                     </div>
                     <div className='register__box'>
                         <p className='register__input-name'>Пароль</p>
-                        <input className='register__input' type='passw' name='passw'
-                               value={password} placeholder='*************' required/>
+                        <input className='register__input' type='password' name='password'
+                            /*   value={password} */ placeholder='*************' required/>
                     </div>
                     <button className='register__button' type='submit'>Войти</button>
                 </form>
