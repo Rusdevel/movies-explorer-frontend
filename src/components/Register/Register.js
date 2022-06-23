@@ -3,6 +3,8 @@ import './Register.css';
 import {Link} from "react-router-dom";
 import Logo from "../../images/logo.svg";
 
+
+
 function Register(props) {
     const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -10,6 +12,7 @@ function Register(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault()
+    // вносим пользователя в БД
     props.onRegister(email, password, name)
 }
 
