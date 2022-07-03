@@ -17,10 +17,10 @@ function Header (props) {
                     <div className="header__main">
                     <LogoHeader/>
       <div className="header__container">
-      <NavLink className="header__button" target="_blank" to="/signup">
+      <NavLink className="header__button"  to="/signup">
                                 Регистрация
                             </NavLink>
-                            <NavLink className="header__button header__button-active" target="_blank"  to="/signin">
+                            <NavLink className="header__button header__button-active"   to="/signin">
                                 Войти
                             </NavLink>
       </div>

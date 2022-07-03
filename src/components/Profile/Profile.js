@@ -2,10 +2,21 @@ import React from 'react';
 import './Profile.css';
 import {Link} from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 
-function Profile() {
-    const [name, email] = React.useState('')
+function Profile(props) {
+    const currentUser = React.useContext(CurrentUserContext);
+    const [name, setName] = React.useState('');
+    const [email, setEmail] = React.useState('');
+
+    // После загрузки текущего пользователя из API
+  // его данные будут использованы в управляемых компонентах.
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+  }, [currentUser]);
+
     return (
         <section className='profile'>
             <Navigation />
@@ -20,10 +31,10 @@ function Profile() {
                     <div className='profile__box profile__box-style'>
                         <p className='profile__input-name'>E-mail</p>
                         <input className='profile__input' type='email' name='email'
-                               value={email || ''} placeholder='ruslanbestaev77@yandex.ru' required/>
+                               value={email} placeholder='ruslanbestaev77@yandex.ru' required/>
                     </div>
                     <button className='profile__subtitle' type="submit">Редактировать</button>
-                    <Link className='profile__exit' to='/signin'>Выйти из аккаунта</Link>
+                    <Link className='profile__exit' to='/signin' onClick ={props.onSignOut}>Выйти из аккаунта</Link>
                 </form>
             </div>
         </section>
