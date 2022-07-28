@@ -11,6 +11,7 @@ import ProtectedRoute from '../ProtectedRoute';
 import * as auth from "../../utils/auth";
 import './App.css';
 import api from "../../utils/MainApi";
+import NotFound from "../NotFound/NotFound";
 
 
 
@@ -21,6 +22,9 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false); // проверка вошел ли пользователь в учетку
   const [userEmail, setUserEmail] = React.useState('') // переменная для вывода почты в шапку
   const history = useHistory();
+
+// хуки значения попапа ошибки
+  const [NotFoundPopupOpen, setNotFoundPopupOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -58,23 +62,36 @@ function login(email, password) {
           history.push('/movies');
       })
       .catch((err) => {
+        handleNotFoundPopupOpen();
+        history.push('/error');
+        console.log('ошибка');
           console.log(err)
           
       })
 }
 
+//обновляем профиль
+function handleUpdateUser({name, email}) {
+  api
+    .editeUserDate(name, email)
+    .then((data) => {
+      console.log(data);
+      setCurrentUser({...currentUser, name: data.name, email: data.email});
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 // выход из учетной записи
 function signOut() {
-  auth.logout().then(
-    ()=> {history.push('/signin');
-    setLoggedIn(false);}
-  )
-  .catch((err) => {
-    console.log('Что то не так')
-    
-})
-  
+  setLoggedIn(false);
+  history.push('/signin');
 }
+
+//function hidden() {
+ // history.push('/error');
+//};
 // проверка токена для допуска к фильмам
 const checkToken = React.useCallback(() => {
   auth.checkToken().then(
@@ -90,6 +107,11 @@ const checkToken = React.useCallback(() => {
           }
       );
 }, [history]);
+
+//функция открытия попапа ошибки
+function handleNotFoundPopupOpen() {
+  setNotFoundPopupOpen(!NotFoundPopupOpen)
+}
 
 React.useEffect(() => { 
       checkToken();
@@ -107,6 +129,7 @@ React.useEffect(() => {
                             loggedIn={loggedIn}
                             onSignOut={signOut}
                             component={Profile}
+                            onUpdateUser={handleUpdateUser}
                     />
 <ProtectedRoute path='/saved-movies'
                             loggedIn={loggedIn}
@@ -115,18 +138,21 @@ React.useEffect(() => {
       <Route exact path="/">
         <Main />
       </Route>
+      <Route path="/error">
+        <NotFound isOpen={NotFoundPopupOpen} />
+      </Route>
       <Route  path="/signin">
-        <Login onLogin={login}  />
+        <Login onLogin={login} />
       </Route>
       <Route path="/signup">
         <Register onRegister ={register} />
       </Route>
       <Route>
-                        {loggedIn ? <Redirect to='/movies'/> : <Redirect to='/sign-in'/>}
+                        {loggedIn ? <Redirect to='/movies'/> : <Redirect to='/signin'/>}
                     </Route>
-     
+                    
       </Switch> 
-
+      
     </div>
     </CurrentUserContext.Provider>
   );

@@ -28,6 +28,20 @@ export const authorization = (email, password) => {
     }).then((res) => checkRes(res))
 }
 
+export const signOut = (email, password) => {
+    return fetch(`${BASE_URL}/profile`, {
+        method: 'POST',
+        credentials: "include",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({email, password})
+    }).then((res) => checkRes(res))
+}
+
+
+
 export const checkToken = () => {
     return fetch(`${BASE_URL}/users/me`, {
         method: 'GET',

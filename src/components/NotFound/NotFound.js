@@ -1,8 +1,8 @@
 import React from 'react';
-import './notFound.css';
+import './NotFound.css';
 import {Link, useHistory} from "react-router-dom";
 
-function NotFound() {
+function NotFound(props) {
     const history = useHistory();
     return(
         <section className='not-found'>

@@ -11,6 +11,19 @@ class Api {
       }).then(this._checkRes);
     }
 
+    //отправляем измененные данные пользовотеля на сервер
+  editeUserDate(name, email) {
+    return fetch(`${this._url}/users/me`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        email:email,
+      }),
+    }).then(this._checkRes);
+  }
+
     // проверяем приняли ли запрос
     _checkRes(res) {
       if (res.ok) {

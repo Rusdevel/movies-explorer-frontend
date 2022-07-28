@@ -4,6 +4,8 @@
     display: flex;
     justify-content: center;
     background-color:  #202020;
+   
+    z-index: 1;
 }
 
 .not-found__container {
