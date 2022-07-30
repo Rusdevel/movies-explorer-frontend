@@ -85,8 +85,10 @@ function handleUpdateUser({name, email}) {
 
 // выход из учетной записи
 function signOut() {
-  setLoggedIn(false);
-  history.push('/signin');
+  auth.signOut().then(() => {
+    setLoggedIn(false);
+    history.push('/signin');
+  });
 }
 
 //function hidden() {
