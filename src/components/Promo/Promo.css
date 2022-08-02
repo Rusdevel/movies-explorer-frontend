@@ -1,107 +1,100 @@
 .promo {
-    background-color: #073042;
-    background-image: url(../../images/Promo-logo.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    min-width: 320px;
-    color: #FFFFFF;
-    padding-bottom: 10px;
-    height: 570px;
+  background-color: #073042;
+  background-image: url(../../images/Promo-logo.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  min-width: 320px;
+  color: #ffffff;
+  padding-bottom: 10px;
+  height: 570px;
 }
 
-
 @media screen and (min-width: 768px) {
-.promo {
+  .promo {
     background-color: #073042;
-    color: #FFFFFF;
+    color: #ffffff;
     height: 784px;
-}
+  }
 }
 
 .promo__group {
-    min-width: 284px;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
+  min-width: 284px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
 }
-
 
 @media screen and (min-width: 768px) {
-.promo__group {
+  .promo__group {
     min-width: 668px;
+  }
 }
-}
-
 
 @media screen and (min-width: 1280px) {
-.promo__group {
-min-width: 1140px;
-flex-direction: initial;
-align-items: start;
-}
+  .promo__group {
+    min-width: 1140px;
+    flex-direction: initial;
+    align-items: start;
+  }
 }
 
 .promo__logo {
-    width: 210px;
+  width: 210px;
 }
 
 @media screen and (min-width: 768px) {
-.promo__logo {
+  .promo__logo {
     width: 310px;
+  }
 }
-}
-
 
 .promo__container {
-display: flex;
-flex-direction: column;
-align-items: center;
-margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
 }
 @media screen and (min-width: 768px) {
-.promo__container {
+  .promo__container {
     margin-bottom: 78px;
+  }
 }
-}
-
 
 @media screen and (min-width: 1280px) {
-.promo__container {
+  .promo__container {
     margin-right: 190px;
     align-items: start;
     margin-bottom: 77px;
     margin: auto;
-}
+  }
 }
 
 .promo__title {
-    width: 284px;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 28px;
-    line-height: 38px;
-    text-align: center;
-    padding-top: 207px;
+  width: 284px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 38px;
+  text-align: center;
+  padding-top: 207px;
 }
-
 
 @media screen and (min-width: 768px) {
-.promo__title {
+  .promo__title {
     margin: 0;
     width: 668px;
     font-size: 40px;
     line-height: 56px;
     text-align: center;
     padding-top: 340px;
-}
+  }
 }
 @media screen and (min-width: 1280px) {
+  .promo {
+    height: 524px;
+  }
 
-    .promo {
-        height: 524px;
-    }
-
-.promo__title {
+  .promo__title {
     width: 730px;
     font-size: 50px;
     line-height: 58px;
@@ -111,6 +104,5 @@ margin-bottom: 30px;
     font-weight: 400;
     margin: 0;
     padding-top: 200px;
-
-}
+  }
 }

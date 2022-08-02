@@ -1,6 +1,8 @@
 {
-    "prettier.jsxSingleQuote": true,
-    "prettier.printWidth": 60,
-    "prettier.requirePragma": true,
-    "prettier.resolveGlobalModules": true
+  "prettier.jsxSingleQuote": true,
+  "prettier.printWidth": 60,
+  "prettier.requirePragma": true,
+  "prettier.resolveGlobalModules": true,
+  "prettier.requireConfig": true,
+  "editor.formatOnSave": true
 }

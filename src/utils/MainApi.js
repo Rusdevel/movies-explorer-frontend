@@ -1,17 +1,17 @@
 class Api {
-    constructor(options) {
-      this._headers = options.headers;
-      this._url = options.url;
-    }
-    // Получаем информацию о пользователе
-    getUserInfo() {
-      return fetch(`${this._url}/users/me`, {
-        headers: this._headers,
-        credentials: "include",
-      }).then(this._checkRes);
-    }
+  constructor(options) {
+    this._headers = options.headers;
+    this._url = options.url;
+  }
+  // Получаем информацию о пользователе
+  getUserInfo() {
+    return fetch(`${this._url}/users/me`, {
+      headers: this._headers,
+      credentials: "include",
+    }).then(this._checkRes);
+  }
 
-    //отправляем измененные данные пользовотеля на сервер
+  //отправляем измененные данные пользовотеля на сервер
   editeUserDate(name, email) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
@@ -19,25 +19,25 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: name,
-        email:email,
+        email: email,
       }),
     }).then(this._checkRes);
   }
 
-    // проверяем приняли ли запрос
-    _checkRes(res) {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка ${res.status}`);
+  // проверяем приняли ли запрос
+  _checkRes(res) {
+    if (res.ok) {
+      return res.json();
     }
-  
-    // другие методы работы с API
+    return Promise.reject(`Ошибка ${res.status}`);
   }
-  const api = new Api({
-    url: `http://localhost:3000`,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  export default api;
+
+  // другие методы работы с API
+}
+const api = new Api({
+  url: `http://localhost:3000`,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+export default api;

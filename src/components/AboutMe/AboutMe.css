@@ -1,136 +1,134 @@
 .AboutMe {
-    background-color: #202020;
-    min-width: 320px;
-    padding: 70px 0 69px;
-    color: #FFFFFF;
+  background-color: #202020;
+  min-width: 320px;
+  padding: 70px 0 69px;
+  color: #ffffff;
 }
 
 .AboutMe__container {
-    margin: 0 14px
+  margin: 0 14px;
 }
 
 .AboutMe__title {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 22px;
-    padding: 0 0 28px;
-    border-bottom: #DADADA solid 1px;
-    margin: 0;
-    margin-bottom: 60px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  padding: 0 0 28px;
+  border-bottom: #dadada solid 1px;
+  margin: 0;
+  margin-bottom: 60px;
 }
 
 .AboutMe__photo {
-    width: 292px;
-    margin: 0 0 40px 0;
-    height: 352px;
-    border-radius: 10px;
-    text-align: center;
+  width: 292px;
+  margin: 0 0 40px 0;
+  height: 352px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .AboutMe__subtitle {
-    font-size: 30px;
-    line-height: 36.31px;
-    padding-bottom: 20px;
-    font-weight: 400;
-    margin: 0;
+  font-size: 30px;
+  line-height: 36.31px;
+  padding-bottom: 20px;
+  font-weight: 400;
+  margin: 0;
 }
 
 .AboutMe__text {
-font-size: 11px;
-line-height: 16px;
-font-weight: 500;
-padding-bottom: 20px;
-margin: 0;
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 500;
+  padding-bottom: 20px;
+  margin: 0;
 }
 
 .AboutMe__links {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .AboutMe__link {
-    color: 
-    #FFFFFF;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    margin-right: 26px;
-    transition: opacity 0.9s linear 0.3s;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  margin-right: 26px;
+  transition: opacity 0.9s linear 0.3s;
 }
 .AboutMe__link:hover {
-    opacity:60%;
+  opacity: 60%;
 }
 
 @media screen and (min-width: 768px) {
-    .AboutMe {
-        min-width: 768px;
-        padding: 90px 0 90px;
-    }
-    .AboutMe__container {
-        margin: 0 50px
-    }
-    .AboutMe__block {
-        display: flex;
-        flex-direction: row-reverse;
-        margin-top: 20px;
-    }
-    .AboutMe__title {
-        font-size: 22px;
-        font-weight: 400;
-        line-height: 26.63px;
-        padding: 0 0 23px;
-        margin-bottom: 66px;
-    }
-    .AboutMe__photo {
-        width: 255px;
-        height:  307px;
-        margin: 0 0 0 49px;
-        border-radius: 10px;
-        text-align: center;
-    }
-    .AboutMe__subtitle {
-        font-size: 40px;
-        line-height: 40px;
-        padding-bottom: 16px;
-    }
-    .AboutMe__text {
+  .AboutMe {
+    min-width: 768px;
+    padding: 90px 0 90px;
+  }
+  .AboutMe__container {
+    margin: 0 50px;
+  }
+  .AboutMe__block {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 20px;
+  }
+  .AboutMe__title {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 26.63px;
+    padding: 0 0 23px;
+    margin-bottom: 66px;
+  }
+  .AboutMe__photo {
+    width: 255px;
+    height: 307px;
+    margin: 0 0 0 49px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .AboutMe__subtitle {
+    font-size: 40px;
+    line-height: 40px;
+    padding-bottom: 16px;
+  }
+  .AboutMe__text {
     font-size: 12px;
     line-height: 18px;
     font-weight: 500;
-    }
-    .AboutMe__links {
-        margin-top: -20px;
-    }
+  }
+  .AboutMe__links {
+    margin-top: -20px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
-    .AboutMe {
-        min-width: 1280px;
-        padding: 110px 0 101px;
-    }
-    .AboutMe__container {
-        margin: 0 70px
-    }
-    
-    
-    .AboutMe__photo {
-        width: 270px;
-        height:  327px;
-        margin: 0 0 0 270px;
-        border-radius: 10px;
-        text-align: center;
-    }
-    .AboutMe__subtitle {
-        font-size: 50px;
-        line-height: 58px;
-        padding-bottom: 18px;
-    }
-    .AboutMe__text {
+  .AboutMe {
+    min-width: 1280px;
+    padding: 110px 0 101px;
+  }
+  .AboutMe__container {
+    margin: 0 70px;
+  }
+
+  .AboutMe__photo {
+    width: 270px;
+    height: 327px;
+    margin: 0 0 0 270px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .AboutMe__subtitle {
+    font-size: 50px;
+    line-height: 58px;
+    padding-bottom: 18px;
+  }
+  .AboutMe__text {
     font-size: 14px;
     line-height: 22px;
     font-weight: 400;
-    }
-    .AboutMe__links {
-        margin-top: -22px;
-    }
+  }
+  .AboutMe__links {
+    margin-top: -22px;
+  }
 }
