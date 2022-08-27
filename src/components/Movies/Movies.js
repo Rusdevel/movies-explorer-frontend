@@ -10,7 +10,7 @@ function Movies() {
     <main className="main__movies">
       <Header />
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList movies={movies} />
       <div className="movies-cardList__container">
         <button className="movies-cardList__button">Ещё</button>
       </div>

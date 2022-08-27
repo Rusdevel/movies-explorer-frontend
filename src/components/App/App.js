@@ -11,10 +11,12 @@ import ProtectedRoute from "../ProtectedRoute";
 import * as auth from "../../utils/auth";
 import "./App.css";
 import api from "../../utils/MainApi";
+import moviesApi from "../../utils/MoviesApi";
 import NotFound from "../NotFound/NotFound";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
+  const [movies, setMovies] = React.useState([]);
 
   //Авторизация
   const [loggedIn, setLoggedIn] = React.useState(false); // проверка вошел ли пользователь в учетку
@@ -26,15 +28,19 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-      const promises = [api.getUserInfo()];
+      const promises = [api.getUserInfo(), moviesApi.getInitialMovies()];
 
       Promise.all(promises)
-        .then(([userData]) => {
+        .then(([userData, initialMovies]) => {
+          // данные профиля
           console.log(userData.data.name, userData.data.email);
           setCurrentUser({
             name: userData.data.name,
             email: userData.data.email,
           });
+          // данные фильмов
+          console.log(initialMovies);
+          setMovies(initialMovies);
         })
         .catch((result) => console.log(`${result} при загрузке данных`));
     }
@@ -127,6 +133,7 @@ function App() {
             path="/movies"
             loggedIn={loggedIn}
             component={Movies}
+            movies={movies}
           />
           <ProtectedRoute
             path="/profile"
