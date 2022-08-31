@@ -5,12 +5,12 @@ import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import "./Movies.css";
 
-function Movies() {
+function Movies(props) {
   return (
     <main className="main__movies">
       <Header />
       <SearchForm />
-      <MoviesCardList movies={movies} />
+      <MoviesCardList movies={props.movies} />
       <div className="movies-cardList__container">
         <button className="movies-cardList__button">Ещё</button>
       </div>
