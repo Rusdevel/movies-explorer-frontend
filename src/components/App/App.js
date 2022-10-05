@@ -16,7 +16,30 @@ import NotFound from "../NotFound/NotFound";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
-  const [movies, setMovies] = React.useState([]);
+  // const [movies, setMovies] = React.useState([]);
+  // const [likedMoviesIds, setLikedMoviesIds] = React.useState([]);
+  // const [likedMoviesByServer, setLikedMoviesByServer] = React.useState([]);
+  // const [alertMessage, setAlertMessage] = React.useState('');
+  const [moviesState, setMoviesState] = React.useState({
+    movies: [],
+    likedMovies: [],
+    updateLikedMoviesIds: (movie) => {
+      return api
+        .saveMovie(movie)
+        .then((data) => {
+          setMoviesState((oldMoviesState) => {
+            return {
+              ...oldMoviesState,
+              likedMovies: oldMoviesState.likedMovies.concat(data),
+            };
+          });
+        })
+        .catch((err) => {
+          console.log("Что то то пошло не так в лайке карточки" + err);
+          // setAlertMessageWraper("Что-то пошло не так... попробуйте еще раз...");
+        });
+    },
+  });
 
   //Авторизация
   const [loggedIn, setLoggedIn] = React.useState(false); // проверка вошел ли пользователь в учетку
@@ -40,7 +63,9 @@ function App() {
           });
           // данные фильмов
           console.log(initialMovies);
-          setMovies(initialMovies);
+          setMoviesState((oldMovies) => {
+            return { ...oldMovies, movies: initialMovies };
+          });
         })
         .catch((result) => console.log(`${result} при загрузке данных`));
     }
@@ -115,6 +140,71 @@ function App() {
         console.log(err);
       });
   }, [history]);
+  // если пользователь зарегестрирован, показываем все понравившиеся фильмы
+  React.useEffect(() => {
+    if (loggedIn) {
+      api
+        .getAllLikedMovie()
+        .then((data) => {
+          setMoviesState((oldMoviesState) => {
+            return { ...oldMoviesState, likedMovies: data };
+          });
+        })
+        .catch((err) => {
+          console.log("res err", err);
+        });
+    }
+    // } else {
+    //   // setLikedMoviesByServer([]);
+    // }
+  }, [loggedIn]);
+  /*
+  useEffect(() => {
+    const tempArr = likedMoviesByServer.map((item) => {
+      return item.movieId;
+    });
+    setLikedMoviesIds(tempArr);
+  }, [likedMoviesByServer]);
+*/
+  // понравившиеся фильмы
+  const updateLikedMoviesIds = (id, movie) => {
+    // id = 1
+    const isNeedSaveLike = !likedMoviesByServer.find((item) => {
+      return item.movieId === id;
+    });
+
+    if (isNeedSaveLike) {
+      api
+        .saveLikedMovie(movie)
+        .then((data) => {
+          let tempArr = [...likedMoviesByServer];
+          tempArr.push(data);
+          setLikedMoviesByServer(tempArr);
+        })
+        .catch((err) => {
+          console.log("res err", err);
+          // setAlertMessageWraper("Что-то пошло не так... попробуйте еще раз...");
+        });
+    } else {
+      const tempObj = likedMoviesByServer.find((item) => {
+        return item.movieId === id;
+      });
+    }
+  };
+  /*api
+        .deleteLikedMovie(tempObj._id, token)
+        .then((data) => {
+          const tempArr = likedMoviesByServer.filter((item) => {
+            return item._id !== tempObj._id;
+          });
+
+          setLikedMoviesByServer(tempArr);
+        })
+        .catch((err) => {
+          setAlertMessageWraper("Что-то пошло не так... попробуйте еще раз...");
+          // console.log('deleteLikedMovie res err', err)
+        });
+    */
 
   //функция открытия попапа ошибки
   function handleNotFoundPopupOpen() {
@@ -133,7 +223,9 @@ function App() {
             path="/movies"
             loggedIn={loggedIn}
             component={Movies}
-            movies={movies}
+            moviesState={moviesState}
+            // updateLikedMoviesIds={updateLikedMoviesIds}
+            // likedMoviesIds={likedMoviesIds}
           />
           <ProtectedRoute
             path="/profile"
@@ -146,6 +238,9 @@ function App() {
             path="/saved-movies"
             loggedIn={loggedIn}
             component={SavedMovies}
+            moviesState={moviesState}
+            // updateLikedMoviesIds={updateLikedMoviesIds}
+            // likedMoviesIds={likedMoviesIds}
           />
           <Route exact path="/">
             <Main />

@@ -32,7 +32,7 @@ function Navigation(props) {
           >
             Аккаунт
           </Link>
-          <Link href="#" target="_blank" rel="noopener noreferrer">
+          <Link to="/" target="_blank" rel="noopener noreferrer">
             <img
               className="logo__account header__nav-link"
               src={LogoAcount}

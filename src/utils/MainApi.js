@@ -24,6 +24,41 @@ class Api {
     }).then(this._checkRes);
   }
 
+  // сохраняем понравившиеся фильмы
+  saveMovie(movie) {
+    return fetch(`${this._url}/movies`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country: movie.country || "данные отсутствуют",
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: "https://api.nomoreparties.co/beatfilm-movies" + movie.image.url,
+        trailerLink: movie.trailerLink,
+        nameRU: movie.nameRU || "Фильм не имеет русского имени",
+        nameEN: movie.nameEN || "Фильм не имеет английского имени",
+        thumbnail:
+          "https://api.nomoreparties.co/beatfilm-movies" +
+          movie.image.formats.thumbnail.url,
+        movieId: movie.id,
+      }),
+    }).then(this._checkRes);
+  }
+
+  //показать все сохраненные фильмы
+  getAllLikedMovie() {
+    return fetch(`${this._url}/movies`, {
+      headers: this._headers,
+      credentials: "include",
+    }).then(this._checkRes);
+  }
+
   // проверяем приняли ли запрос
   _checkRes(res) {
     if (res.ok) {

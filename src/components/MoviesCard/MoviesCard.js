@@ -9,26 +9,28 @@ function MoviesCard(props) {
   }
 
   const { pathname } = useLocation();
+  const { moviesState, movie } = props;
+  React.useEffect(() => {
+    setIsSaved(moviesState.likedMovies.some((m) => m.movieId === movie.id));
+  });
+
   return (
     <section className="movies-card">
       {pathname === "/movies" ? (
-        <>
+        isSaved ? (
+          <button className="movies-card__saved-save_active" />
+        ) : (
           <button
-            className={` ${
-              !isSaved ? "movies-card__saved" : "movies-card__saved-hidden"
-            }`}
-            onClick={handleToggleSaved}
+            className="movies-card__saved"
+            onClick={() => {
+              moviesState
+                .updateLikedMoviesIds(movie)
+                .then(() => setIsSaved(true));
+            }}
           >
-            Сохранить
+            Save
           </button>
-          <button
-            className={` ${
-              isSaved
-                ? "movies-card__saved-save_active"
-                : "movies-card__saved-save"
-            }`}
-          ></button>
-        </>
+        )
       ) : (
         <button className="movies-card__delete ">X</button>
       )}

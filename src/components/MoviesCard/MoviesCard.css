@@ -28,7 +28,8 @@
 }
 
 .movies-img {
-  max-width: 100%;
+  max-width: 290px;
+  height: 205px;
   border-radius: 10px;
 }
 

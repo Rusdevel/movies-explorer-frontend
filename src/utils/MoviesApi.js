@@ -3,7 +3,7 @@ class MoviesApi {
     this._headers = options.headers;
     this._url = options.url;
   }
-  // Получаем информацию о пользователе
+  // Получаем фильмы
   getInitialMovies() {
     return fetch(`${this._url}`, {
       headers: this._headers,

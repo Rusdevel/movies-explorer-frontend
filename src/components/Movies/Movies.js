@@ -10,7 +10,7 @@ function Movies(props) {
     <main className="main__movies">
       <Header />
       <SearchForm />
-      <MoviesCardList movies={props.movies} />
+      <MoviesCardList moviesState={props.moviesState} />
       <div className="movies-cardList__container">
         <button className="movies-cardList__button">Ещё</button>
       </div>
