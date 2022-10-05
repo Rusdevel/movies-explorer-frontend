@@ -31,10 +31,10 @@ const validateLogin = celebrate({
 const validateMovies = celebrate({
   body: Joi.object().keys({
     country: Joi.string().min(2).max(30).required(),
-    director: Joi.string().min(2).max(30).required(),
+    director: Joi.string().min(2).max(50).required(),
     duration: Joi.number().required(),
     year: Joi.string().min(2).max(30).required(),
-    description: Joi.string().min(2).max(30).required(),
+    description: Joi.string().min(2).max(1000).required(),
     movieId: Joi.number().required(),
     image: Joi.string().required().custom((value) => {
       if (!isURL(value)) {
@@ -48,8 +48,8 @@ const validateMovies = celebrate({
       }
       return value;
     }),
-    nameRU: Joi.string().min(2).max(30).required(),
-    nameEN: Joi.string().min(2).max(30).required(),
+    nameRU: Joi.string().min(2).max(50).required(),
+    nameEN: Joi.string().min(2).max(50).required(),
     thumbnail: Joi.string().required().custom((value) => {
       if (!isURL(value)) {
         throw new Error('Ссылка некоректная');
