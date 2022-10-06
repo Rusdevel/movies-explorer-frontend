@@ -10,7 +10,7 @@ function SavedMovies(props) {
     <main className="main__save-movies">
       <Header />
       <SearchForm />
-      <MoviesCardList movies={props.moviesState} />
+      <MoviesCardList moviesState={props.moviesState} />
       <Footer />
     </main>
   );

@@ -18,7 +18,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   // const [movies, setMovies] = React.useState([]);
   // const [likedMoviesIds, setLikedMoviesIds] = React.useState([]);
-  // const [likedMoviesByServer, setLikedMoviesByServer] = React.useState([]);
+  const [likedMoviesByServer, setLikedMoviesByServer] = React.useState([]);
   // const [alertMessage, setAlertMessage] = React.useState('');
   const [moviesState, setMoviesState] = React.useState({
     movies: [],
@@ -70,6 +70,15 @@ function App() {
         .catch((result) => console.log(`${result} при загрузке данных`));
     }
   }, [loggedIn]);
+
+  // функция рендеринга сохраненных фильмов
+  function getAllLikedMovie() {
+    api.getAllLikedMovie().then((data) => {
+      likedMoviesByServer(data);
+      console.log(likedMoviesByServer);
+      setLoggedIn(true);
+    });
+  }
 
   // обработка регистрации
   function register(name, email, password) {
@@ -167,30 +176,7 @@ function App() {
   }, [likedMoviesByServer]);
 */
   // понравившиеся фильмы
-  const updateLikedMoviesIds = (id, movie) => {
-    // id = 1
-    const isNeedSaveLike = !likedMoviesByServer.find((item) => {
-      return item.movieId === id;
-    });
 
-    if (isNeedSaveLike) {
-      api
-        .saveLikedMovie(movie)
-        .then((data) => {
-          let tempArr = [...likedMoviesByServer];
-          tempArr.push(data);
-          setLikedMoviesByServer(tempArr);
-        })
-        .catch((err) => {
-          console.log("res err", err);
-          // setAlertMessageWraper("Что-то пошло не так... попробуйте еще раз...");
-        });
-    } else {
-      const tempObj = likedMoviesByServer.find((item) => {
-        return item.movieId === id;
-      });
-    }
-  };
   /*api
         .deleteLikedMovie(tempObj._id, token)
         .then((data) => {

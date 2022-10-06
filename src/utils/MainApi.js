@@ -39,13 +39,12 @@ class Api {
         duration: movie.duration,
         year: movie.year,
         description: movie.description,
-        image: "https://api.nomoreparties.co/beatfilm-movies" + movie.image.url,
+        image: "https://api.nomoreparties.co" + movie.image.url,
         trailerLink: movie.trailerLink,
         nameRU: movie.nameRU || "Фильм не имеет русского имени",
         nameEN: movie.nameEN || "Фильм не имеет английского имени",
         thumbnail:
-          "https://api.nomoreparties.co/beatfilm-movies" +
-          movie.image.formats.thumbnail.url,
+          "https://api.nomoreparties.co" + movie.image.formats.thumbnail.url,
         movieId: movie.id,
       }),
     }).then(this._checkRes);
