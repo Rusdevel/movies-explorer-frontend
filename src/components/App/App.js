@@ -21,8 +21,29 @@ function App() {
   const [likedMoviesByServer, setLikedMoviesByServer] = React.useState([]);
   // const [alertMessage, setAlertMessage] = React.useState('');
   const [moviesState, setMoviesState] = React.useState({
+    allMovies: [],
+    allLikedMovies: [],
     movies: [],
     likedMovies: [],
+
+    // фильтр поиска фильмов
+    searchMovies: (search, isShort) => {
+      setMoviesState((oldMoviesState) => {
+        return {
+          ...oldMoviesState,
+          movies: oldMoviesState.allMovies
+            // .files((movie) => !isShort || movie.duration <= 40)
+            .filter(
+              (movie) => console.log(movie.nameEN.includes(search))
+              // movie.nameEN.contains(search) || movie.nameRU.contains(search)
+            ),
+          likedMovies: oldMoviesState.allLikedMovies.filter((movie) => {
+            movie.nameEN.contains(search) || movie.nameRU.contains(search);
+          }),
+        };
+      });
+    },
+
     updateLikedMoviesIds: (movie) => {
       return api
         .saveMovie(movie)
@@ -64,7 +85,7 @@ function App() {
           // данные фильмов
           console.log(initialMovies);
           setMoviesState((oldMovies) => {
-            return { ...oldMovies, movies: initialMovies };
+            return { ...oldMovies, allMovies: initialMovies };
           });
         })
         .catch((result) => console.log(`${result} при загрузке данных`));
@@ -156,7 +177,7 @@ function App() {
         .getAllLikedMovie()
         .then((data) => {
           setMoviesState((oldMoviesState) => {
-            return { ...oldMoviesState, likedMovies: data };
+            return { ...oldMoviesState, allLikedMovies: data };
           });
         })
         .catch((err) => {

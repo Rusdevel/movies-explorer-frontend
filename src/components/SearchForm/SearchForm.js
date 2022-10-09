@@ -2,7 +2,25 @@ import React from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm() {
+function SearchForm(props) {
+  const [search, setSearch] = React.useState("");
+  const [isShort, setShort] = React.useState(false);
+
+  const { moviesState } = props;
+
+  function changeSearch(e) {
+    setSearch(e.target.value);
+  }
+
+  function changeShort(e) {
+    setShort(e.target.value);
+  }
+
+  function searchClick(e) {
+    e.preventDefault();
+    moviesState.searchMovies(search, isShort);
+  }
+
   return (
     <section className="search-form">
       <form className="search-form__group">
@@ -13,12 +31,17 @@ function SearchForm() {
             type="text"
             placeholder="Фильм"
             required
+            onChange={changeSearch}
           />
-          <button className="search-form__button" type="submit">
+          <button
+            onClick={searchClick}
+            className="search-form__button"
+            type="submit"
+          >
             Поиск
           </button>
         </div>
-        <FilterCheckbox />
+        <FilterCheckbox onChange={changeShort} />
       </form>
     </section>
   );
