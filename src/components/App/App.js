@@ -27,19 +27,22 @@ function App() {
     likedMovies: [],
 
     // фильтр поиска фильмов
-    searchMovies: (search, isShort) => {
+    searchMovies: (search) => {
       setMoviesState((oldMoviesState) => {
         return {
           ...oldMoviesState,
           movies: oldMoviesState.allMovies
-            // .files((movie) => !isShort || movie.duration <= 40)
+            //.files((movie) => !isShort || movie.duration <= 40)
             .filter(
-              (movie) => console.log(movie.nameEN.includes(search))
-              // movie.nameEN.contains(search) || movie.nameRU.contains(search)
+              (movie) =>
+                // показывает все фильмы по поиску
+                movie.nameEN.includes(search) || movie.nameRU.includes(search)
             ),
-          likedMovies: oldMoviesState.allLikedMovies.filter((movie) => {
-            movie.nameEN.contains(search) || movie.nameRU.contains(search);
-          }),
+          // показывает сохраненные фильмы по поиску
+          likedMovies: oldMoviesState.allLikedMovies.filter(
+            (movie) =>
+              movie.nameEN.includes(search) || movie.nameRU.includes(search)
+          ),
         };
       });
     },
