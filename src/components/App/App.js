@@ -26,7 +26,7 @@ function App() {
     movies: [],
     likedMovies: [],
 
-    // фильтр поиска фильмов
+    //  функция поиска фильмов, которая исаользуется на савбмите формы в компоненте SearchForm
     searchMovies: (search) => {
       setMoviesState((oldMoviesState) => {
         return {
@@ -46,7 +46,7 @@ function App() {
         };
       });
     },
-
+    // запись в базу фильма который лайкнул
     updateLikedMoviesIds: (movie) => {
       return api
         .saveMovie(movie)
@@ -88,6 +88,7 @@ function App() {
           // данные фильмов
           console.log(initialMovies);
           setMoviesState((oldMovies) => {
+            //  все фильмы запишутся в allMovies
             return { ...oldMovies, allMovies: initialMovies };
           });
         })
@@ -180,7 +181,13 @@ function App() {
         .getAllLikedMovie()
         .then((data) => {
           setMoviesState((oldMoviesState) => {
-            return { ...oldMoviesState, allLikedMovies: data };
+            return {
+              ...oldMoviesState,
+              // все сохранненые фильмы запишутся в oldMoviesState для его дальнейшего использования в фильтации фильмов
+              allLikedMovies: data,
+              // при открытии saved-movies отобразятся все сохраненные фильмы
+              likedMovies: data,
+            };
           });
         })
         .catch((err) => {
