@@ -38,6 +38,7 @@ function App() {
                 // показывает все фильмы по поиску
                 movie.nameEN.includes(search) || movie.nameRU.includes(search)
             ),
+
           // показывает сохраненные фильмы по поиску
           likedMovies: oldMoviesState.allLikedMovies.filter(
             (movie) =>
@@ -45,6 +46,13 @@ function App() {
           ),
         };
       });
+      // если фильм в списке ненайден, то выдает ошибку
+      if (moviesState.movies.length === 0) {
+        history.push("/error");
+      }
+      if (moviesState.likedMovies.length === 0) {
+        history.push("/error");
+      }
     },
     // запись в базу фильма который лайкнул
     updateLikedMoviesIds: (movie) => {
@@ -128,10 +136,8 @@ function App() {
         history.push("/movies");
       })
       .catch((err) => {
-        handleNotFoundPopupOpen();
         history.push("/error");
         console.log("ошибка");
-        console.log(err);
       });
   }
 
