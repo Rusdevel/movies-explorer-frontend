@@ -72,6 +72,17 @@
   border: 1px #424242 solid;
 }
 
+button:hover {
+  border: 1px solid #dcdedf;
+  color: #000000;
+}
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
 .register__title {
   font-style: normal;
   font-weight: 500;
