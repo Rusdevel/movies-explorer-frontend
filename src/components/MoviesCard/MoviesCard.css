@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+.movies-card__hide {
+  display: none;
+}
+
 .movies-card__saved-hidden {
   display: none;
 }

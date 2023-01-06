@@ -18,7 +18,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   // const [movies, setMovies] = React.useState([]);
   // const [likedMoviesIds, setLikedMoviesIds] = React.useState([]);
-  const [likedMoviesByServer, setLikedMoviesByServer] = React.useState([]);
+  //const [likedMoviesByServer, setLikedMoviesByServer] = React.useState([]);
   // const [alertMessage, setAlertMessage] = React.useState('');
   const [moviesState, setMoviesState] = React.useState({
     allMovies: [],
@@ -26,10 +26,15 @@ function App() {
     movies: [],
     likedMovies: [],
 
-    //  функция поиска фильмов, которая исаользуется на савбмите формы в компоненте SearchForm
-    searchMovies: (search) => {
+    //  функция поиска фильмов, которая исаользуется на сабмите формы в компоненте SearchForm
+    searchMovies: ({ search, paging, isShort, isLiked }) => {
       setMoviesState((oldMoviesState) => {
-        return {
+        // делит карточки фильмов на страницы
+        const { index, size } = paging;
+
+        console.log(index * size);
+
+        const newMoviesState = {
           ...oldMoviesState,
           movies: oldMoviesState.allMovies
             //.files((movie) => !isShort || movie.duration <= 40)
@@ -37,22 +42,25 @@ function App() {
               (movie) =>
                 // показывает все фильмы по поиску
                 movie.nameEN.includes(search) || movie.nameRU.includes(search)
-            ),
+            )
+            .slice(0, index * size), // режет массив так как нам нужно
 
           // показывает сохраненные фильмы по поиску
-          likedMovies: oldMoviesState.allLikedMovies.filter(
-            (movie) =>
-              movie.nameEN.includes(search) || movie.nameRU.includes(search)
-          ),
+          likedMovies: oldMoviesState.allLikedMovies
+            .filter(
+              (movie) =>
+                movie.nameEN.includes(search) || movie.nameRU.includes(search)
+            )
+            .slice(0, index * size), // режет массив так как нам нужно
         };
+        if (isLiked && newMoviesState.likedMovies.length === 0) {
+          history.push("/error");
+        } else if (newMoviesState.movies.length === 0) {
+          history.push("/error");
+        }
+        return newMoviesState;
       });
       // если фильм в списке ненайден, то выдает ошибку
-      if (moviesState.movies.length === 0) {
-        history.push("/error");
-      }
-      if (moviesState.likedMovies.length === 0) {
-        history.push("/error");
-      }
     },
     // запись в базу фильма который лайкнул
     updateLikedMoviesIds: (movie) => {
@@ -69,6 +77,18 @@ function App() {
         .catch((err) => {
           console.log("Что то то пошло не так в лайке карточки" + err);
           // setAlertMessageWraper("Что-то пошло не так... попробуйте еще раз...");
+        });
+    },
+
+    //удаление из Бд фильма который понравился
+    deleteLikedMoviesIds: (movie) => {
+      return api
+        .deleteMovie(movie._id)
+        .then(() => {
+          moviesState.allLikedMovies.filter((c) => c !== movie);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
   });
@@ -105,13 +125,13 @@ function App() {
   }, [loggedIn]);
 
   // функция рендеринга сохраненных фильмов
-  function getAllLikedMovie() {
-    api.getAllLikedMovie().then((data) => {
-      likedMoviesByServer(data);
-      console.log(likedMoviesByServer);
-      setLoggedIn(true);
-    });
-  }
+  //function getAllLikedMovie() {
+  // api.getAllLikedMovie().then((data) => {
+  //   likedMoviesByServer(data);
+  //   console.log(likedMoviesByServer);
+  //   setLoggedIn(true);
+  //   });
+  //}
 
   // обработка регистрации
   function register(name, email, password) {
@@ -171,8 +191,7 @@ function App() {
       .checkToken()
       .then((data) => {
         setLoggedIn(true);
-        console.log(data.data.email);
-        console.log(data.email);
+
         setUserEmail(data.data.email);
         history.push("/movies");
       })

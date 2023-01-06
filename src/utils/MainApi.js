@@ -49,6 +49,14 @@ class Api {
       }),
     }).then(this._checkRes);
   }
+  //удаление понравившегося фильма
+  deleteMovie(movieId) {
+    return fetch(`${this._url}/movies/${movieId}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: this._headers,
+    }).then(this._checkRes);
+  }
 
   //показать все сохраненные фильмы
   getAllLikedMovie() {

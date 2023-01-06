@@ -6,13 +6,23 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import "./Movies.css";
 
 function Movies(props) {
+  const [paging, setPaging] = React.useState({ index: 1, size: 6 });
+
+  function nextPage() {
+    setPaging((oldPaging) => {
+      return { ...oldPaging, index: oldPaging.index + 1 };
+    });
+  }
+
   return (
     <main className="main__movies">
       <Header />
-      <SearchForm moviesState={props.moviesState} />
+      <SearchForm moviesState={props.moviesState} paging={paging} />
       <MoviesCardList moviesState={props.moviesState} />
       <div className="movies-cardList__container">
-        <button className="movies-cardList__button">Ещё</button>
+        <button className="movies-cardList__button" onClick={nextPage}>
+          Ещё
+        </button>
       </div>
       <Footer />
     </main>

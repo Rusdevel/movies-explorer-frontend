@@ -1,12 +1,21 @@
 import React from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import { useLocation } from "react-router-dom";
 
 function SearchForm(props) {
   const [search, setSearch] = React.useState("");
   const [isShort, setShort] = React.useState(false);
+  const { pathname } = useLocation();
 
-  const { moviesState } = props;
+  const { moviesState, paging } = props;
+
+  const isLiked = pathname === "/saved-movies";
+
+  // React.useEffect(() => {
+  //   if (paging === { index: 1, size: 6 }) {
+  //   } else searchClick();
+  // }, [paging]);
 
   function changeSearch(e) {
     setSearch(e.target.value);
@@ -17,8 +26,9 @@ function SearchForm(props) {
   }
 
   function searchClick(e) {
-    e.preventDefault();
-    moviesState.searchMovies(search, isShort);
+    !e || e.preventDefault();
+
+    moviesState.searchMovies({ search, paging, isShort, isLiked });
   }
 
   return (
