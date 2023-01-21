@@ -21,13 +21,15 @@ function App() {
   //const [likedMoviesByServer, setLikedMoviesByServer] = React.useState([]);
   // const [alertMessage, setAlertMessage] = React.useState('');
   const [moviesState, setMoviesState] = React.useState({
+    search: { line: "", isShort: false, isLiked: false },
     allMovies: [],
     allLikedMovies: [],
     movies: [],
     likedMovies: [],
 
     //  функция поиска фильмов, которая исаользуется на сабмите формы в компоненте SearchForm
-    searchMovies: ({ search, paging, isShort, isLiked }) => {
+    searchMovies: ({ search, paging }) => {
+      const { line, isShort, isLiked } = search;
       setMoviesState((oldMoviesState) => {
         // делит карточки фильмов на страницы
         const { index, size } = paging;
@@ -36,12 +38,13 @@ function App() {
 
         const newMoviesState = {
           ...oldMoviesState,
+          search: search,
           movies: oldMoviesState.allMovies
             //.files((movie) => !isShort || movie.duration <= 40)
             .filter(
               (movie) =>
                 // показывает все фильмы по поиску
-                movie.nameEN.includes(search) || movie.nameRU.includes(search)
+                movie.nameEN.includes(line) || movie.nameRU.includes(line)
             )
             .slice(0, index * size), // режет массив так как нам нужно
 
@@ -49,13 +52,15 @@ function App() {
           likedMovies: oldMoviesState.allLikedMovies
             .filter(
               (movie) =>
-                movie.nameEN.includes(search) || movie.nameRU.includes(search)
+                movie.nameEN.includes(line) || movie.nameRU.includes(line)
             )
             .slice(0, index * size), // режет массив так как нам нужно
         };
         if (isLiked && newMoviesState.likedMovies.length === 0) {
+          console.log(JSON.stringify(search));
           history.push("/error");
         } else if (newMoviesState.movies.length === 0) {
+          console.log(JSON.stringify(search));
           history.push("/error");
         }
         return newMoviesState;

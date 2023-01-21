@@ -40,7 +40,6 @@ function MoviesCardList(props) {
               })
             : null}
         </div>
-        {/*<button className='movies-cardList__button'>Ещё</button>*/}
       </div>
     </section>
   );

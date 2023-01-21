@@ -4,13 +4,24 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import "./Movies.css";
+import { getParamsByScreenWidth } from "../../utils/getParamsByScreenWidth";
 
 function Movies(props) {
-  const [paging, setPaging] = React.useState({ index: 1, size: 6 });
-
+  const [paging, setPaging] = React.useState({ index: 1, size: 12 });
+  // настройка кнопки 'ещё'
   function nextPage() {
-    setPaging((oldPaging) => {
-      return { ...oldPaging, index: oldPaging.index + 1 };
+    const { movies, search, searchMovies } = props.moviesState;
+    setPaging(() => {
+      const { moviesStartCount, addMoviesCount } = getParamsByScreenWidth();
+      const newPaging = {
+        size: addMoviesCount,
+        index: movies.length / addMoviesCount + 1,
+      };
+      console.log(moviesStartCount);
+      console.log(movies.length);
+      console.log(addMoviesCount);
+      searchMovies({ search, paging: newPaging });
+      return newPaging;
     });
   }
 

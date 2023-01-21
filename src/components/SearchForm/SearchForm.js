@@ -28,7 +28,8 @@ function SearchForm(props) {
   function searchClick(e) {
     !e || e.preventDefault();
 
-    moviesState.searchMovies({ search, paging, isShort, isLiked });
+    const searchInput = { line: search, isShort, isLiked };
+    moviesState.searchMovies({ search: searchInput, paging });
   }
 
   return (
