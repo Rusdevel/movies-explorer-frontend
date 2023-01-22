@@ -11,7 +11,7 @@ function NotFound(props) {
         <p className="not-found__subtitle">Страница не найдена</p>
         <Link
           className="not-found__link"
-          to="#"
+          to="/movies"
           onClick={() => history.goBack()}
         >
           Назад

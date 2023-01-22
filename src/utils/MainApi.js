@@ -77,7 +77,7 @@ class Api {
   // другие методы работы с API
 }
 const api = new Api({
-  url: `http://localhost:3000`,
+  url: `http://51.250.25.27`,
   headers: {
     "Content-Type": "application/json",
   },

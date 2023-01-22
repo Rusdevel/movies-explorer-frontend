@@ -23,7 +23,7 @@ class MoviesApi {
   // другие методы работы с API
 }
 const moviesApi = new MoviesApi({
-  url: `https://api.nomoreparties.co/beatfilm-movies`,
+  url: `http://51.250.25.27`,
   headers: {
     "Content-Type": "application/json",
   },
