@@ -13,6 +13,7 @@ import "./App.css";
 import api from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import NotFound from "../NotFound/NotFound";
+import InfoTooltip from "../PopapComplate/InfoTooltip";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
@@ -20,6 +21,9 @@ function App() {
   // const [likedMoviesIds, setLikedMoviesIds] = React.useState([]);
   //const [likedMoviesByServer, setLikedMoviesByServer] = React.useState([]);
   // const [alertMessage, setAlertMessage] = React.useState('');
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] =
+    React.useState(false);
+  const [isSuccess, setIsSuccess] = React.useState(false);
   const [moviesState, setMoviesState] = React.useState({
     search: { line: "", isShort: false, isLiked: false },
     allMovies: [],
@@ -166,15 +170,27 @@ function App() {
       });
   }
 
+  function handleInfoTooltipPopupOpen() {
+    setIsInfoTooltipPopupOpen(!isInfoTooltipPopupOpen);
+  }
+  // функция закрытия попапа
+  function closeAllPopups() {
+    setIsInfoTooltipPopupOpen(false);
+  }
+
   //обновляем профиль
   function handleUpdateUser({ name, email }) {
     api
       .editeUserDate(name, email)
       .then((data) => {
+        setIsSuccess(true);
+        handleInfoTooltipPopupOpen();
         console.log(data);
         setCurrentUser({ ...currentUser, name: data.name, email: data.email });
       })
       .catch((err) => {
+        setIsSuccess(false);
+        handleInfoTooltipPopupOpen();
         console.log(err);
       });
   }
@@ -305,6 +321,11 @@ function App() {
             {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/signin" />}
           </Route>
         </Switch>
+        <InfoTooltip
+          isOpen={isInfoTooltipPopupOpen}
+          onClose={closeAllPopups}
+          isSuccess={isSuccess}
+        />
       </div>
     </CurrentUserContext.Provider>
   );

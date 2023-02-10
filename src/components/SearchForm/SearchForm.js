@@ -12,17 +12,13 @@ function SearchForm(props) {
 
   const isLiked = pathname === "/saved-movies";
 
-  // React.useEffect(() => {
-  //   if (paging === { index: 1, size: 6 }) {
-  //   } else searchClick();
-  // }, [paging]);
-
   function changeSearch(e) {
     setSearch(e.target.value);
   }
 
   function changeShort(e) {
     setShort(e.target.value);
+    console.log(isShort);
   }
 
   function searchClick(e) {

@@ -72,7 +72,7 @@
   border: 1px #424242 solid;
 }
 
-button:hover {
+.register__button:hover {
   border: 1px solid #dcdedf;
   color: #000000;
 }

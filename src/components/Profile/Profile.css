@@ -122,9 +122,10 @@
   text-align: center;
   color: #ffffff;
   background-color: #202020;
-  border: 0;
+  border: none;
   margin-top: 351px;
   margin-bottom: 16px;
+  bottom: unset;
 }
 
 @media screen and (min-width: 768px) {

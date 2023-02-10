@@ -13,7 +13,7 @@ function Register(props) {
     formState: { errors, isValid },
     handleSubmit,
   } = useForm({
-    mode: "onBlur",
+    mode: "all",
   });
 
   function onSubmit(evt) {
