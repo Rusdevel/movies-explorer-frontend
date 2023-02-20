@@ -21,6 +21,7 @@ function App() {
   // const [likedMoviesIds, setLikedMoviesIds] = React.useState([]);
   //const [likedMoviesByServer, setLikedMoviesByServer] = React.useState([]);
   // const [alertMessage, setAlertMessage] = React.useState('');
+  const [isPreloaderActive, setPreloaderStatus] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] =
     React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
@@ -32,19 +33,21 @@ function App() {
     likedMovies: [],
 
     //  функция поиска фильмов, которая исаользуется на сабмите формы в компоненте SearchForm
-    searchMovies: ({ search, paging }) => {
+    searchMovies: async ({ search, paging }) => {
       const { line, isShort, isLiked } = search;
       setMoviesState((oldMoviesState) => {
         // делит карточки фильмов на страницы
         const { index, size } = paging;
 
         console.log(index * size);
-
+        // if (moviesState.movies.length === 0) {
+        // setPreloaderStatus(true);
+        // }
         const newMoviesState = {
           ...oldMoviesState,
           search: search,
           movies: oldMoviesState.allMovies
-            //.files((movie) => !isShort || movie.duration <= 40)
+            .filter((movie) => !isShort || movie.duration <= 40)
             .filter(
               (movie) =>
                 // показывает все фильмы по поиску
@@ -54,6 +57,7 @@ function App() {
 
           // показывает сохраненные фильмы по поиску
           likedMovies: oldMoviesState.allLikedMovies
+            .filter((movie) => !isShort || movie.duration <= 40)
             .filter(
               (movie) =>
                 movie.nameEN.includes(line) || movie.nameRU.includes(line)
@@ -67,10 +71,12 @@ function App() {
           console.log(JSON.stringify(search));
           history.push("/error");
         }
+
         return newMoviesState;
       });
       // если фильм в списке ненайден, то выдает ошибку
     },
+
     // запись в базу фильма который лайкнул
     updateLikedMoviesIds: (movie) => {
       return api
@@ -101,6 +107,7 @@ function App() {
         });
     },
   });
+  console.log(moviesState);
 
   //Авторизация
   const [loggedIn, setLoggedIn] = React.useState(false); // проверка вошел ли пользователь в учетку
@@ -125,6 +132,9 @@ function App() {
           // данные фильмов
           console.log(initialMovies);
           setMoviesState((oldMovies) => {
+            if (moviesState.allMovies !== 0) {
+              setPreloaderStatus(false);
+            }
             //  все фильмы запишутся в allMovies
             return { ...oldMovies, allMovies: initialMovies };
           });
@@ -287,6 +297,8 @@ function App() {
             loggedIn={loggedIn}
             component={Movies}
             moviesState={moviesState}
+            isPreloaderActive={isPreloaderActive}
+            setPreloaderStatus={setPreloaderStatus}
             // updateLikedMoviesIds={updateLikedMoviesIds}
             // likedMoviesIds={likedMoviesIds}
           />

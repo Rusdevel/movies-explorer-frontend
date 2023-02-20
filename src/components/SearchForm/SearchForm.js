@@ -5,10 +5,10 @@ import { useLocation } from "react-router-dom";
 
 function SearchForm(props) {
   const [search, setSearch] = React.useState("");
-  const [isShort, setShort] = React.useState(false);
+  const [isShort, setShort] = React.useState(true);
   const { pathname } = useLocation();
 
-  const { moviesState, paging } = props;
+  const { moviesState, paging, setPreloaderStatus } = props;
 
   const isLiked = pathname === "/saved-movies";
 
@@ -17,15 +17,30 @@ function SearchForm(props) {
   }
 
   function changeShort(e) {
-    setShort(e.target.value);
+    setShort(!isShort);
     console.log(isShort);
+  }
+
+  async function moviesStates() {
+    const searchInput = { line: search, isShort, isLiked };
+    await moviesState.searchMovies({
+      search: searchInput,
+      paging,
+    });
   }
 
   function searchClick(e) {
     !e || e.preventDefault();
-
-    const searchInput = { line: search, isShort, isLiked };
-    moviesState.searchMovies({ search: searchInput, paging });
+    setPreloaderStatus(true);
+    new Promise((res) => setTimeout(() => res("done"), 1000))
+      .then(() => moviesStates())
+      .finally(() => {
+        setPreloaderStatus(false);
+      });
+    // moviesStates()
+    // .finally(() => {
+    //   setPreloaderStatus(false);
+    //  });
   }
 
   return (

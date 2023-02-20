@@ -5,6 +5,7 @@ import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import "./Movies.css";
 import { getParamsByScreenWidth } from "../../utils/getParamsByScreenWidth";
+import Preloader from "../Preloader/Preloader";
 
 function Movies(props) {
   const [paging, setPaging] = React.useState({ index: 1, size: 12 });
@@ -28,7 +29,12 @@ function Movies(props) {
   return (
     <main className="main__movies">
       <Header />
-      <SearchForm moviesState={props.moviesState} paging={paging} />
+      <SearchForm
+        moviesState={props.moviesState}
+        paging={paging}
+        setPreloaderStatus={props.setPreloaderStatus}
+      />
+      {props.isPreloaderActive && <Preloader />}
       <MoviesCardList moviesState={props.moviesState} />
       <div className="movies-cardList__container">
         <button className="movies-cardList__button" onClick={nextPage}>
