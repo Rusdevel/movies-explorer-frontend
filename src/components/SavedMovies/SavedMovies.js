@@ -9,7 +9,10 @@ function SavedMovies(props) {
   return (
     <main className="main__save-movies">
       <Header />
-      <SearchForm moviesState={props.moviesState} />
+      <SearchForm
+        moviesState={props.moviesState}
+        setPreloaderStatus={props.setPreloaderStatus}
+      />
       <MoviesCardList moviesState={props.moviesState} />
       <Footer />
     </main>
