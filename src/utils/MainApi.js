@@ -77,7 +77,7 @@ class Api {
   // другие методы работы с API
 }
 const api = new Api({
-  url: `http://api-movies.nomoredomains.work`,
+  url: `https://api-movies.nomoredomains.work`,
   headers: {
     "Content-Type": "application/json",
   },

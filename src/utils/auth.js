@@ -1,4 +1,4 @@
-export const BASE_URL = "http://api-movies.nomoredomains.work";
+export const BASE_URL = "https://api-movies.nomoredomains.work";
 
 const checkRes = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
