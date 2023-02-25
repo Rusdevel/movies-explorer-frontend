@@ -5,3 +5,4 @@
 * Адрес сайта:https://front-movies.nomoredomains.work
 * Адрес backend https://api-movies.nomoredomains.work
 * Публичный ip 51.250.18.104
+* Ссылка на пул реквест, https://github.com/Rusdevel/movies-explorer-frontend/pull/2
