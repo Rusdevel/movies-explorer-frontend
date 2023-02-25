@@ -314,6 +314,7 @@ function App() {
             loggedIn={loggedIn}
             component={SavedMovies}
             moviesState={moviesState}
+            setPreloaderStatus={setPreloaderStatus}
             // updateLikedMoviesIds={updateLikedMoviesIds}
             // likedMoviesIds={likedMoviesIds}
           />
