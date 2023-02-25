@@ -107,7 +107,6 @@ function App() {
         });
     },
   });
-  console.log(moviesState);
 
   //Авторизация
   const [loggedIn, setLoggedIn] = React.useState(false); // проверка вошел ли пользователь в учетку
