@@ -5,6 +5,7 @@ import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
+import { getParamsByScreenWidth } from "../../utils/getParamsByScreenWidth";
 
 function SavedMovies(props) {
   const [paging, setPaging] = React.useState({ index: 1, size: 12 });
