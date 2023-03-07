@@ -26,7 +26,7 @@ function SavedMovies(props) {
   }
   return (
     <main className="main__save-movies">
-      <Header />
+      <Header loggedIn={props.loggedIn} />
       <SearchForm
         moviesState={props.moviesState}
         setPreloaderStatus={props.setPreloaderStatus}

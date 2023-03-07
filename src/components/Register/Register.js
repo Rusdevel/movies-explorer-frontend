@@ -1,7 +1,8 @@
 import React from "react";
 import "./Register.css";
 import { Link } from "react-router-dom";
-import Logo from "../../images/logo.svg";
+//import Logo from "../../images/logo.svg";
+import LogoHeader from "../LogoHeader/LogoHeader";
 import { useForm } from "react-hook-form"; // фреймворк для валидации форм
 
 function Register(props) {
@@ -19,7 +20,7 @@ function Register(props) {
   function onSubmit(evt) {
     //evt.preventDefault();
     // вносим пользователя в БД
-    props.onRegister(email, password, name);
+    props.onRegister(name, email, password);
   }
 
   // меняем Email
@@ -39,7 +40,7 @@ function Register(props) {
   return (
     <section className="register">
       <div className="register__container">
-        <img className="register__logo" src={Logo} alt="логотип" />
+        <LogoHeader />
         <h1 className="register__title">Добро пожаловать!</h1>
 
         <form className="register__form" onSubmit={handleSubmit(onSubmit)}>

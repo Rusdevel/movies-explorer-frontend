@@ -57,6 +57,7 @@ function App() {
 
           // показывает сохраненные фильмы по поиску
           likedMovies: oldMoviesState.allLikedMovies
+
             .filter((movie) => !isShort || movie.duration <= 40)
             .filter(
               (movie) =>
@@ -64,11 +65,18 @@ function App() {
             )
             .slice(0, index * size), // режет массив так как нам нужно
         };
+        // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
+        localStorage.setItem("movies", JSON.stringify(newMoviesState.movies));
+        localStorage.setItem("search", JSON.stringify(search));
+        console.log(localStorage.getItem("search"));
+        console.log(localStorage.getItem("movies"));
         if (isLiked && newMoviesState.likedMovies.length === 0) {
           console.log(JSON.stringify(search));
           history.push("/error");
         } else if (newMoviesState.movies.length === 0) {
           console.log(JSON.stringify(search));
+          //  localStorage.setItem("movies", JSON.stringify(search));
+          // console.log(localStorage.setItem(localStorage.getItem('token')));
           history.push("/error");
         }
 
@@ -155,8 +163,10 @@ function App() {
   function register(name, email, password) {
     auth
       .register(name, email, password)
-      .then(() => {
-        history.push("/signin");
+      .then((data) => {
+        login(data.email, password);
+        //console.log(data);
+        //history.push("/movies");
       })
       .catch((err) => {
         console.log(err);
@@ -168,14 +178,14 @@ function App() {
     auth
       .authorization(email, password)
       .then((data) => {
+        //localStorage.setItem("token", data.token);
+        // console.log(localStorage.getItem("token"));
         setUserEmail(email);
         setLoggedIn(true);
-        console.log(setLoggedIn);
         history.push("/movies");
       })
       .catch((err) => {
-        history.push("/error");
-        console.log("ошибка");
+        console.log(err);
       });
   }
 
@@ -208,7 +218,8 @@ function App() {
   function signOut() {
     auth.signOut().then(() => {
       setLoggedIn(false);
-      history.push("/signin");
+      history.push("/");
+      //localStorage.removeItem("token");
     });
   }
 
@@ -318,7 +329,7 @@ function App() {
             // likedMoviesIds={likedMoviesIds}
           />
           <Route exact path="/">
-            <Main />
+            <Main loggedIn={loggedIn} />
           </Route>
           <Route path="/error">
             <NotFound isOpen={NotFoundPopupOpen} />
@@ -330,7 +341,7 @@ function App() {
             <Register onRegister={register} />
           </Route>
           <Route>
-            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/signin" />}
+            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
           </Route>
         </Switch>
         <InfoTooltip

@@ -28,7 +28,7 @@ function Movies(props) {
 
   return (
     <main className="main__movies">
-      <Header />
+      <Header loggedIn={props.loggedIn} />
       <SearchForm
         moviesState={props.moviesState}
         paging={paging}

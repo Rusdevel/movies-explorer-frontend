@@ -24,7 +24,7 @@ function InfoTooltip(props) {
           />
           <h2 className="popup__title popup__title-tooltip">
             {props.isSuccess
-              ? "Вы успешно Зарегистрировались"
+              ? "Запрос к серверу прошел успешно"
               : "Что-то пошло не так! Попробуйте еще раз."}
           </h2>
         </div>

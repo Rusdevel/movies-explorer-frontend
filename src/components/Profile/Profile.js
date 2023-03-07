@@ -58,7 +58,7 @@ function Profile(props) {
               className="profile__input"
               type="text"
               {...register("name", {
-                required: "Поле обязательно к заполнению", // поле обязательно для заполнения
+                // required: "Поле обязательно к заполнению", // поле обязательно для заполнения
                 minLength: {
                   // минимальное кол-во символов
                   value: 2,
@@ -85,7 +85,7 @@ function Profile(props) {
               className="profile__input"
               type="email"
               {...register("email", {
-                required: "Поле обязательно к заполнению", // поле обязательно для заполнения
+                //required: "Поле обязательно к заполнению", // поле обязательно для заполнения
                 minLength: {
                   // минимальное кол-во символов
                   value: 2,

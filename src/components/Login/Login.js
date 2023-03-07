@@ -2,8 +2,9 @@ import React from "react";
 import "./Login.css";
 import "../Register/Register.css";
 import { Link } from "react-router-dom";
-import Logo from "../../images/logo.svg";
+//import Logo from "../../images/logo.svg";
 import { useForm } from "react-hook-form"; // фреймворк для валидации форм
+import LogoHeader from "../LogoHeader/LogoHeader";
 
 function Login(props) {
   const [email, setEmail] = React.useState("");
@@ -32,7 +33,7 @@ function Login(props) {
   return (
     <section className="login">
       <div className="register__container">
-        <img className="logo" src={Logo} alt="логотип" />
+        <LogoHeader />
         <h1 className="register__title">Добро пожаловать!</h1>
         <form className="register__form" onSubmit={handleSubmit(onSubmit)}>
           <div className="register__box">

@@ -36,6 +36,7 @@ function SearchForm(props) {
       .then(() => moviesStates())
       .finally(() => {
         setPreloaderStatus(false);
+        console.log(moviesState.searchMovies);
       });
     // moviesStates()
     // .finally(() => {

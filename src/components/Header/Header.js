@@ -10,9 +10,7 @@ function Header(props) {
   return (
     <header className={isColorHead}>
       <div className="header__group">
-        {pathname === "/movies" ||
-        pathname === "/saved-movies" ||
-        pathname === "/profile" ? (
+        {props.loggedIn ? (
           <Navigation />
         ) : (
           <div className="header__main">

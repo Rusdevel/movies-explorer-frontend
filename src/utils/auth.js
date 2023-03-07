@@ -1,10 +1,10 @@
-export const BASE_URL = "https://api-movies.nomoredomains.work";
+export const BASE_URL = `http://localhost:3000`;
 
 const checkRes = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
 
-export const register = (email, password, name) => {
+export const register = (name, email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     credentials: "include",
