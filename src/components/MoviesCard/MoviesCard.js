@@ -49,11 +49,17 @@ function MoviesCard(props) {
               </button>
             )}
             <div className="movies-card__container">
-              <img
-                className="movies-img"
-                src={props.url}
-                alt={props.title}
-              ></img>
+              <a
+                href={props.trailerLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  className="movies-img"
+                  src={props.url}
+                  alt={props.title}
+                ></img>
+              </a>
 
               <div className="movies-card__group">
                 <h2 className="movies-card__title">{props.title}</h2>

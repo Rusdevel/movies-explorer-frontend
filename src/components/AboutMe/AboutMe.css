@@ -20,11 +20,11 @@
 }
 
 .AboutMe__photo {
-  width: 292px;
-  margin: 0 0 40px 0;
-  height: 352px;
-  border-radius: 10px;
-  text-align: center;
+  width: 284px;
+    margin: 0 0 36px 0;
+    height: 352px;
+    border-radius: 10px;
+    object-fit:cover;
 }
 
 .AboutMe__subtitle {
@@ -82,10 +82,7 @@
   }
   .AboutMe__photo {
     width: 255px;
-    height: 307px;
-    margin: 0 0 0 49px;
-    border-radius: 10px;
-    text-align: center;
+        height: 305px;
   }
   .AboutMe__subtitle {
     font-size: 40px;
@@ -114,9 +111,6 @@
   .AboutMe__photo {
     width: 270px;
     height: 327px;
-    margin: 0 0 0 270px;
-    border-radius: 10px;
-    text-align: center;
   }
   .AboutMe__subtitle {
     font-size: 50px;

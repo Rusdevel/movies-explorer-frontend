@@ -14,13 +14,10 @@ import api from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import NotFound from "../NotFound/NotFound";
 import InfoTooltip from "../PopapComplate/InfoTooltip";
+import NotFoundMovie from "../NotFoundMovie/NotFoundMovie";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
-  // const [movies, setMovies] = React.useState([]);
-  // const [likedMoviesIds, setLikedMoviesIds] = React.useState([]);
-  //const [likedMoviesByServer, setLikedMoviesByServer] = React.useState([]);
-  // const [alertMessage, setAlertMessage] = React.useState('');
   const [isPreloaderActive, setPreloaderStatus] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] =
     React.useState(false);
@@ -50,8 +47,10 @@ function App() {
             .filter((movie) => !isShort || movie.duration <= 40)
             .filter(
               (movie) =>
+                //const targetMovie = movie.nameRU.toLowerCase();
                 // показывает все фильмы по поиску
-                movie.nameEN.includes(line) || movie.nameRU.includes(line)
+                movie.nameEN.toLowerCase().includes(line.toLowerCase()) ||
+                movie.nameRU.toLowerCase().includes(line.toLowerCase())
             )
             .slice(0, index * size), // режет массив так как нам нужно
 
@@ -61,7 +60,8 @@ function App() {
             .filter((movie) => !isShort || movie.duration <= 40)
             .filter(
               (movie) =>
-                movie.nameEN.includes(line) || movie.nameRU.includes(line)
+                movie.nameEN.toLowerCase().includes(line.toLowerCase()) ||
+                movie.nameRU.toLowerCase().includes(line.toLowerCase())
             )
             .slice(0, index * size), // режет массив так как нам нужно
         };
@@ -72,12 +72,12 @@ function App() {
         console.log(localStorage.getItem("movies"));
         if (isLiked && newMoviesState.likedMovies.length === 0) {
           console.log(JSON.stringify(search));
-          history.push("/error");
+          history.push("/notfoundmovie");
         } else if (newMoviesState.movies.length === 0) {
           console.log(JSON.stringify(search));
           //  localStorage.setItem("movies", JSON.stringify(search));
           // console.log(localStorage.setItem(localStorage.getItem('token')));
-          history.push("/error");
+          history.push("/notfoundmovie");
         }
 
         return newMoviesState;
@@ -150,15 +150,6 @@ function App() {
     }
   }, [loggedIn]);
 
-  // функция рендеринга сохраненных фильмов
-  //function getAllLikedMovie() {
-  // api.getAllLikedMovie().then((data) => {
-  //   likedMoviesByServer(data);
-  //   console.log(likedMoviesByServer);
-  //   setLoggedIn(true);
-  //   });
-  //}
-
   // обработка регистрации
   function register(name, email, password) {
     auth
@@ -219,6 +210,21 @@ function App() {
     auth.signOut().then(() => {
       setLoggedIn(false);
       history.push("/");
+      localStorage.removeItem("search");
+      localStorage.removeItem("movies");
+      setMoviesState({
+        search: {
+          line: "",
+          isShort: false,
+          isLiked: false,
+        },
+        allMovies: [],
+        allLikedMovies: [],
+        movies: [],
+        likedMovies: [],
+      });
+      console.log(localStorage.getItem("search"));
+      console.log(localStorage.getItem("movies"));
       //localStorage.removeItem("token");
     });
   }
@@ -333,6 +339,9 @@ function App() {
           </Route>
           <Route path="/error">
             <NotFound isOpen={NotFoundPopupOpen} />
+          </Route>
+          <Route path="/notfoundmovie">
+            <NotFoundMovie isOpen={NotFoundPopupOpen} />
           </Route>
           <Route path="/signin">
             <Login onLogin={login} />

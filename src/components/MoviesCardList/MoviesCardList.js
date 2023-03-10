@@ -15,6 +15,7 @@ function MoviesCardList(props) {
               ? moviesState.movies.map((movie) => {
                   return (
                     <MoviesCard
+                      trailerLink={movie.trailerLink}
                       url={"https://api.nomoreparties.co" + movie.image.url}
                       key={movie.id}
                       title={movie.nameRU}
@@ -29,6 +30,7 @@ function MoviesCardList(props) {
             ? moviesState.likedMovies.map((likedMovie) => {
                 return (
                   <MoviesCard
+                    trailerLink={likedMovie.trailerLink}
                     url={likedMovie.image}
                     key={likedMovie.id}
                     title={likedMovie.nameRU}
