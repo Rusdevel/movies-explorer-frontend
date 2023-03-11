@@ -23,11 +23,11 @@ function Profile(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     props.handleUpdateUser({
       name: values.name,
       email: values.email,
     });
+    resetForm();
   }
 
   //меняем имя профиля
