@@ -330,6 +330,7 @@ function App() {
             loggedIn={loggedIn}
             component={SavedMovies}
             moviesState={moviesState}
+            isPreloaderActive={isPreloaderActive}
             setPreloaderStatus={setPreloaderStatus}
             // updateLikedMoviesIds={updateLikedMoviesIds}
             // likedMoviesIds={likedMoviesIds}

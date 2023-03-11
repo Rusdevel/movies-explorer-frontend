@@ -1,5 +1,5 @@
 import "./AboutMe.css";
-import Photo from "../../images/photoFrontend.svg";
+import Photo from "../../images/(1).png";
 function AboutMe() {
   return (
     <section className="AboutMe">
