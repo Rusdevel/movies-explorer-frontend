@@ -18,6 +18,11 @@ import NotFoundMovie from "../NotFoundMovie/NotFoundMovie";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
+  const [formError, setFormError] = React.useState({
+    registerError: false,
+    errorMessage: "",
+  });
+  const [profileUpdateMessage, setProfileUpdateMessage] = React.useState("");
   const [isPreloaderActive, setPreloaderStatus] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] =
     React.useState(false);
@@ -204,6 +209,13 @@ function App() {
         console.log(err);
       });
   }
+  // очищает всплытие ошибок валидации
+  function clearFormError() {
+    setFormError({
+      registerError: false,
+      errorMessage: "",
+    });
+  }
 
   // выход из учетной записи
   function signOut() {
@@ -320,10 +332,14 @@ function App() {
           />
           <ProtectedRoute
             path="/profile"
+            handleUpdateUser={handleUpdateUser}
+            formError={formError}
             loggedIn={loggedIn}
             onSignOut={signOut}
             component={Profile}
-            onUpdateUser={handleUpdateUser}
+            clearFormError={clearFormError}
+            profileUpdateMessage={profileUpdateMessage}
+            setProfileUpdateMessage={setProfileUpdateMessage}
           />
           <ProtectedRoute
             path="/saved-movies"

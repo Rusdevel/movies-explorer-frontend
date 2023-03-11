@@ -3,20 +3,16 @@ import "./Profile.css";
 import { Link } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { useForm } from "react-hook-form";
+import { useFormWithValidation } from "../../Validation/UseForm";
 
 function Profile(props) {
   const currentUser = React.useContext(CurrentUserContext);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
+  const { profileUpdateMessage, setProfileUpdateMessage } = props;
 
-  const {
-    register,
-    formState: { errors, isValid },
-    handleSubmit,
-  } = useForm({
-    mode: "all",
-  });
+  const { values, errors, handleChange, isValid, resetForm } =
+    useFormWithValidation(props.clearFormError);
 
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
@@ -25,29 +21,45 @@ function Profile(props) {
     setEmail(currentUser.email);
   }, [currentUser]);
 
-  function onSubmit(e) {
-    // Запрещаем браузеру переходить по адресу формы
-    // e.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault();
 
-    // Передаём значения управляемых компонентов во внешний обработчик
-    props.onUpdateUser({
-      name: name,
-      email: email,
+    props.handleUpdateUser({
+      name: values.name,
+      email: values.email,
     });
   }
 
   //меняем имя профиля
   function changeName(e) {
+    setProfileUpdateMessage("");
     setName(e.target.value);
+    if (currentUser.name === e.target.value) {
+      e.target.setCustomValidity(
+        "Имя пользователя не может сопадать с существующем!"
+      );
+    } else {
+      e.target.setCustomValidity("");
+    }
+
+    handleChange(e);
   }
 
   //меняем почту
   function changeEmail(e) {
+    setProfileUpdateMessage("");
     setEmail(e.target.value);
+    if (currentUser.email === e.target.value) {
+      e.target.setCustomValidity("email не может сопадать с существующем!");
+    } else {
+      e.target.setCustomValidity("");
+    }
+
+    handleChange(e);
   }
 
   return (
-    <section className="profile" onSubmit={handleSubmit(onSubmit)}>
+    <section className="profile" onSubmit={handleSubmit}>
       <Navigation />
       <div className="profile__container">
         <h1 className="profile__title">Привет {currentUser.name}</h1>
@@ -57,53 +69,42 @@ function Profile(props) {
             <input
               className="profile__input"
               type="text"
-              {...register("name", {
-                // required: "Поле обязательно к заполнению", // поле обязательно для заполнения
-                minLength: {
-                  // минимальное кол-во символов
-                  value: 2,
-                  message: "Минимум 2 символа",
-                },
-                pattern: {
-                  value: /^[A-zА-я\-/]{2,20}$/, // содержит только латиницу, кириллицу, пробел или дефис
-                  message: "Используются запрещенные символы",
-                },
-                validate: (value, formValues) => value !== currentUser.name,
-              })}
+              name="name"
               value={name || ""}
-              placeholder="Руслан"
               required
+              placeholder={currentUser.name}
               onChange={changeName}
             />
           </div>
-          <span className="register__subtitle">
-            {errors?.name && (errors?.name?.message || "Ошибка")}
-          </span>
+          {errors.name && (
+            <span className="register__subtitle">{errors.name}</span>
+          )}
           <div className="profile__box profile__box-style">
             <p className="profile__input-name">E-mail</p>
             <input
               className="profile__input"
               type="email"
-              {...register("email", {
-                //required: "Поле обязательно к заполнению", // поле обязательно для заполнения
-                minLength: {
-                  // минимальное кол-во символов
-                  value: 2,
-                  message: "Минимум 2 символа",
-                },
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]$/i, // соответствует шаблону электронной почты
-                  message: "Почта указана некорректно",
-                },
-              })}
+              name="email"
               value={email || ""}
-              placeholder="ruslanbestaev77@yandex.ru"
+              required
+              placeholder={currentUser.email}
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               onChange={changeEmail}
             />
           </div>
-          <span className="register__subtitle">
-            {errors?.email && (errors?.email?.message || "Ошибка")}
-          </span>
+          {errors.email && (
+            <span className="register__subtitle">{errors.email}</span>
+          )}
+
+          {props.formError.registerError && (
+            <span className="register__subtitle">
+              {props.formError.errorMessage || "Что-то пошло не так..."}
+            </span>
+          )}
+
+          {profileUpdateMessage && (
+            <span className="register__subtitle">{profileUpdateMessage}</span>
+          )}
 
           <button
             className="profile__subtitle"
