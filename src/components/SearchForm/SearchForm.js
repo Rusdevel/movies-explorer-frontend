@@ -14,7 +14,7 @@ function SearchForm(props) {
   const isLiked = pathname === "/saved-movies";
 
   React.useEffect(() => {
-    if (!isLiked) {
+    if (!isLiked && storageSerch !== null) {
       setSearch(storageSerch.line);
       setShort(storageSerch.isShort);
     }

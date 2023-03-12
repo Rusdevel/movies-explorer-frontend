@@ -185,11 +185,13 @@ function App() {
             const localStorageSearch = JSON.parse(
               localStorage.getItem("search")
             );
-            moviesState.search = {
-              line: localStorageSearch.line,
-              isShort: localStorageSearch.isShort,
-              isLiked: localStorageSearch.isLiked,
-            };
+            if (localStorageSearch !== null) {
+              moviesState.search = {
+                line: localStorageSearch.line,
+                isShort: localStorageSearch.isShort,
+                isLiked: localStorageSearch.isLiked,
+              };
+            }
 
             console.log(localStorageSearch);
             console.log(moviesState.search);
@@ -199,18 +201,13 @@ function App() {
               ...oldMovies,
 
               allMovies: initialMovies,
-              search: {
-                line: localStorageSearch.line,
-                isShort: localStorageSearch.isShort,
-                isLiked: localStorageSearch.isLiked,
-              },
 
               movies:
                 JSON.parse(localStorage.getItem("movies")) ||
                 oldMovies.movies ||
                 initialMovies,
             };
-            console.log(search);
+            //console.log(search);
           });
         })
         .catch((result) => console.log(`${result} при загрузке данных`));
