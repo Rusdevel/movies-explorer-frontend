@@ -62,7 +62,10 @@ function App() {
           // показывает сохраненные фильмы по поиску
         };
         // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
-        localStorage.setItem("movies", JSON.stringify(newMoviesState.movies));
+        const storage = localStorage.setItem(
+          "movies",
+          JSON.stringify(newMoviesState.movies)
+        );
         localStorage.setItem("search", JSON.stringify(search));
         console.log(localStorage.getItem("search"));
         console.log(localStorage.getItem("movies"));
@@ -170,6 +173,7 @@ function App() {
           });
           // данные фильмов
           console.log(initialMovies);
+
           //const localStorageSearch = localStorage.getItem("search");
           //const localStorageMovies = localStorage.getItem("movies");
           // if(localStorageSearch)
@@ -178,22 +182,41 @@ function App() {
             if (moviesState.allMovies !== 0) {
               setPreloaderStatus(false);
             }
+            const localStorageSearch = JSON.parse(
+              localStorage.getItem("search")
+            );
+            moviesState.search = {
+              line: localStorageSearch.line,
+              isShort: localStorageSearch.isShort,
+              isLiked: localStorageSearch.isLiked,
+            };
+
+            console.log(localStorageSearch);
+            console.log(moviesState.search);
+
             //  все фильмы запишутся в allMovies
             return {
               ...oldMovies,
+
               allMovies: initialMovies,
-              search:
-                JSON.parse(localStorage.getItem("search")) || oldMovies.search,
+              search: {
+                line: localStorageSearch.line,
+                isShort: localStorageSearch.isShort,
+                isLiked: localStorageSearch.isLiked,
+              },
+
               movies:
                 JSON.parse(localStorage.getItem("movies")) ||
                 oldMovies.movies ||
                 initialMovies,
             };
+            console.log(search);
           });
         })
         .catch((result) => console.log(`${result} при загрузке данных`));
-      console.log("dsdsd");
+      //console.log(localStorageSearch);
       console.log(JSON.parse(localStorage.getItem("movies")));
+      console.log(moviesState.search);
     }
   }, [loggedIn]);
 

@@ -2,6 +2,7 @@ import React from "react";
 import "./FilterCheckbox.css";
 
 function FilterCheckbox(props) {
+  const { isShort } = props;
   return (
     <div className="filter__group">
       <div className="filter-checkbox">
@@ -9,6 +10,8 @@ function FilterCheckbox(props) {
         <label className="filter-checkbox__container">
           <input
             className="filter-checkbox__input"
+            value={isShort}
+            checked={isShort}
             onChange={props.onChange}
             type="checkbox"
           />
