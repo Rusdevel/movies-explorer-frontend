@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 
 function SearchForm(props) {
   const [search, setSearch] = React.useState("");
-  const [isShort, setShort] = React.useState(true);
+  const [isShort, setShort] = React.useState(false);
   const { pathname } = useLocation();
 
   const { moviesState, paging, setPreloaderStatus } = props;
@@ -16,17 +16,27 @@ function SearchForm(props) {
     setSearch(e.target.value);
   }
 
-  function changeShort(e) {
+  function changeShort() {
     setShort(!isShort);
-    console.log(isShort);
+    console.log(moviesState.movies.length);
+    if (moviesState.movies.length !== 0) {
+      moviesStates();
+    }
   }
 
   async function moviesStates() {
     const searchInput = { line: search, isShort, isLiked };
-    await moviesState.searchMovies({
-      search: searchInput,
-      paging,
-    });
+    if (isLiked) {
+      await moviesState.searchMoviesLiked({
+        search: searchInput,
+        paging,
+      });
+    } else {
+      await moviesState.searchMovies({
+        search: searchInput,
+        paging,
+      });
+    }
   }
 
   function searchClick(e) {
@@ -36,7 +46,6 @@ function SearchForm(props) {
       .then(() => moviesStates())
       .finally(() => {
         setPreloaderStatus(false);
-        console.log(moviesState.searchMovies);
       });
     // moviesStates()
     // .finally(() => {

@@ -34,7 +34,7 @@ function App() {
     movies: [],
     likedMovies: [],
 
-    //  функция поиска фильмов, которая исаользуется на сабмите формы в компоненте SearchForm
+    //  функция поиска фильмов, которая используется на сабмите формы в компоненте SearchForm
     searchMovies: async ({ search, paging }) => {
       const { line, isShort, isLiked } = search;
       setMoviesState((oldMoviesState) => {
@@ -60,6 +60,41 @@ function App() {
             .slice(0, index * size), // режет массив так как нам нужно
 
           // показывает сохраненные фильмы по поиску
+        };
+        // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
+        localStorage.setItem("movies", JSON.stringify(newMoviesState.movies));
+        localStorage.setItem("search", JSON.stringify(search));
+        console.log(localStorage.getItem("search"));
+        console.log(localStorage.getItem("movies"));
+        console.log(search);
+
+        if (newMoviesState.movies.length === 0) {
+          console.log(JSON.stringify(search));
+          //  localStorage.setItem("movies", JSON.stringify(search));
+          // console.log(localStorage.setItem(localStorage.getItem('token')));
+          history.push("/notfoundmovie");
+        }
+
+        return newMoviesState;
+      });
+      // если фильм в списке ненайден, то выдает ошибку
+    },
+
+    searchMoviesLiked: async ({ search, paging }) => {
+      const { line, isShort, isLiked } = search;
+      setMoviesState((oldMoviesState) => {
+        // делит карточки фильмов на страницы
+        const { index, size } = paging;
+
+        console.log(index * size);
+        // if (moviesState.movies.length === 0) {
+        // setPreloaderStatus(true);
+        // }
+        const newMoviesState = {
+          ...oldMoviesState,
+          search: search,
+
+          // показывает сохраненные фильмы по поиску
           likedMovies: oldMoviesState.allLikedMovies
 
             .filter((movie) => !isShort || movie.duration <= 40)
@@ -71,17 +106,9 @@ function App() {
             .slice(0, index * size), // режет массив так как нам нужно
         };
         // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
-        localStorage.setItem("movies", JSON.stringify(newMoviesState.movies));
-        localStorage.setItem("search", JSON.stringify(search));
-        console.log(localStorage.getItem("search"));
-        console.log(localStorage.getItem("movies"));
+
         if (isLiked && newMoviesState.likedMovies.length === 0) {
           console.log(JSON.stringify(search));
-          history.push("/notfoundmovie");
-        } else if (newMoviesState.movies.length === 0) {
-          console.log(JSON.stringify(search));
-          //  localStorage.setItem("movies", JSON.stringify(search));
-          // console.log(localStorage.setItem(localStorage.getItem('token')));
           history.push("/notfoundmovie");
         }
 
@@ -143,17 +170,44 @@ function App() {
           });
           // данные фильмов
           console.log(initialMovies);
+          //const localStorageSearch = localStorage.getItem("search");
+          //const localStorageMovies = localStorage.getItem("movies");
+          // if(localStorageSearch)
+
           setMoviesState((oldMovies) => {
             if (moviesState.allMovies !== 0) {
               setPreloaderStatus(false);
             }
             //  все фильмы запишутся в allMovies
-            return { ...oldMovies, allMovies: initialMovies };
+            return {
+              ...oldMovies,
+              allMovies: initialMovies,
+              search:
+                JSON.parse(localStorage.getItem("search")) || oldMovies.search,
+              movies:
+                JSON.parse(localStorage.getItem("movies")) ||
+                oldMovies.movies ||
+                initialMovies,
+            };
           });
         })
         .catch((result) => console.log(`${result} при загрузке данных`));
+      console.log("dsdsd");
+      console.log(JSON.parse(localStorage.getItem("movies")));
     }
   }, [loggedIn]);
+
+  // React.useEffect(() => {
+  // setMoviesState((oldMoviesState) => {
+  //   console.log(JSON.stringify(oldMoviesState));
+  //  const newMoviesState = {
+  //   ...oldMoviesState,
+
+  // показывает сохраненные фильмы по поиску
+  //  };
+  //   return newMoviesState;
+  //  });
+  // });
 
   // обработка регистрации
   function register(name, email, password) {
