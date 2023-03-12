@@ -83,13 +83,13 @@ function App() {
       // если фильм в списке ненайден, то выдает ошибку
     },
 
-    searchMoviesLiked: async ({ search, paging }) => {
+    searchMoviesLiked: async ({ search }) => {
       const { line, isShort, isLiked } = search;
       setMoviesState((oldMoviesState) => {
         // делит карточки фильмов на страницы
-        const { index, size } = paging;
+        // const { index, size } = paging;
 
-        console.log(index * size);
+        // console.log(index * size);
         // if (moviesState.movies.length === 0) {
         // setPreloaderStatus(true);
         // }
@@ -105,8 +105,8 @@ function App() {
               (movie) =>
                 movie.nameEN.toLowerCase().includes(line.toLowerCase()) ||
                 movie.nameRU.toLowerCase().includes(line.toLowerCase())
-            )
-            .slice(0, index * size), // режет массив так как нам нужно
+            ),
+          //  .slice(0, index * size), // режет массив так как нам нужно
         };
         // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
 
