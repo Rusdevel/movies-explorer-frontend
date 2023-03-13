@@ -70,6 +70,7 @@ function Profile(props) {
               className="profile__input"
               type="text"
               name="name"
+              minLength={2}
               value={name || ""}
               required
               placeholder={currentUser.name}

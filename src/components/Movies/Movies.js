@@ -10,11 +10,10 @@ import Preloader from "../Preloader/Preloader";
 function Movies(props) {
   const [paging, setPaging] = React.useState({ index: 1, size: 12 });
   const { movies, search, searchMovies } = props.moviesState;
-
+  const { moviesStartCount, addMoviesCount } = getParamsByScreenWidth();
   // настройка кнопки 'ещё'
   function nextPage() {
     setPaging(() => {
-      const { moviesStartCount, addMoviesCount } = getParamsByScreenWidth();
       const newPaging = {
         size: addMoviesCount,
         index: movies.length / addMoviesCount + 1,
@@ -27,6 +26,8 @@ function Movies(props) {
     });
   }
 
+  const indexMovies = (paging.index - 1) * addMoviesCount;
+
   return (
     <main className="main__movies">
       <Header loggedIn={props.loggedIn} />
@@ -37,7 +38,7 @@ function Movies(props) {
       />
       {props.isPreloaderActive && <Preloader />}
       <MoviesCardList moviesState={props.moviesState} />
-      {movies.length !== 0 ? (
+      {movies.length !== 0 && movies.length !== indexMovies ? (
         <div className="movies-cardList__container">
           <button className="movies-cardList__button" onClick={nextPage}>
             Ещё
