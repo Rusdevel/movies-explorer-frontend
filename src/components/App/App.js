@@ -15,6 +15,7 @@ import moviesApi from "../../utils/MoviesApi";
 import NotFound from "../NotFound/NotFound";
 import InfoTooltip from "../PopapComplate/InfoTooltip";
 import NotFoundMovie from "../NotFoundMovie/NotFoundMovie";
+import PopapMoviesNotFound from "../PopapMoviesNotFound/PopapMoviesNotFound";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
@@ -26,6 +27,9 @@ function App() {
   const [isPreloaderActive, setPreloaderStatus] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] =
     React.useState(false);
+  const [isPopapMoviesNotFoundOpen, setPopapMoviesNotFoundOpen] =
+    React.useState(false);
+
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [moviesState, setMoviesState] = React.useState({
     search: { line: "", isShort: false, isLiked: false },
@@ -75,7 +79,8 @@ function App() {
           console.log(JSON.stringify(search));
           //  localStorage.setItem("movies", JSON.stringify(search));
           // console.log(localStorage.setItem(localStorage.getItem('token')));
-          history.push("/notfoundmovie");
+          //handlePopapMoviesNotFoundOpen();
+          handlePopapMoviesNotFoundOpen();
         }
 
         return newMoviesState;
@@ -262,9 +267,13 @@ function App() {
   function handleInfoTooltipPopupOpen() {
     setIsInfoTooltipPopupOpen(!isInfoTooltipPopupOpen);
   }
+  function handlePopapMoviesNotFoundOpen() {
+    setPopapMoviesNotFoundOpen(!isPopapMoviesNotFoundOpen);
+  }
   // функция закрытия попапа
   function closeAllPopups() {
     setIsInfoTooltipPopupOpen(false);
+    setPopapMoviesNotFoundOpen(false);
   }
 
   //обновляем профиль
@@ -456,6 +465,10 @@ function App() {
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
           isSuccess={isSuccess}
+        />
+        <PopapMoviesNotFound
+          isOpen={isPopapMoviesNotFoundOpen}
+          onClose={closeAllPopups}
         />
       </div>
     </CurrentUserContext.Provider>
