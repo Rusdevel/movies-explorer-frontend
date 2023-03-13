@@ -27,9 +27,6 @@ function SearchForm(props) {
   function changeShort() {
     setShort(!isShort);
     console.log(moviesState.movies.length);
-    if (moviesState.movies.length !== 0) {
-      moviesStates();
-    }
   }
 
   async function moviesStates() {
