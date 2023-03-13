@@ -435,10 +435,18 @@ function App() {
             <NotFoundMovie isOpen={NotFoundPopupOpen} />
           </Route>
           <Route path="/signin">
-            <Login onLogin={login} />
+            <Login
+              onLogin={login}
+              formError={formError}
+              clearFormError={clearFormError}
+            />
           </Route>
           <Route path="/signup">
-            <Register onRegister={register} />
+            <Register
+              onRegister={register}
+              formError={formError}
+              clearFormError={clearFormError}
+            />
           </Route>
           <Route>
             {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
