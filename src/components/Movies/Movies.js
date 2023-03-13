@@ -38,7 +38,9 @@ function Movies(props) {
       />
       {props.isPreloaderActive && <Preloader />}
       <MoviesCardList moviesState={props.moviesState} />
-      {movies.length !== 0 && movies.length !== indexMovies ? (
+      {movies.length !== 0 &&
+      movies.length !== indexMovies &&
+      movies.length >= moviesStartCount ? (
         <div className="movies-cardList__container">
           <button className="movies-cardList__button" onClick={nextPage}>
             Ещё
