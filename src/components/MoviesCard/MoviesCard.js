@@ -17,61 +17,85 @@ function MoviesCard(props) {
 
   return (
     <>
-      {
-        // Проверяем удалена ли карточка
-        !isDelete ? (
-          <section className="movies-card">
-            {pathname === "/movies" ? (
-              isSaved ? (
-                <button className="movies-card__saved-save_active" />
-              ) : (
+      {pathname === "/movies" ? (
+        <section className="movies-card">
+          {isSaved ? (
+            <button
+              className="movies-card__saved-save_active"
+              onClick={() => {
+                setIsSaved(false), setIsDelete(true);
+              }}
+            />
+          ) : (
+            <button
+              className="movies-card__saved"
+              onClick={() => {
+                moviesState
+                  .updateLikedMoviesIds(movie)
+                  .then(() => setIsSaved(true));
+              }}
+            >
+              Save
+            </button>
+          )}
+
+          <div className="movies-card__container">
+            <a
+              href={props.trailerLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                className="movies-img"
+                src={props.url}
+                alt={props.title}
+              ></img>
+            </a>
+
+            <div className="movies-card__group">
+              <h2 className="movies-card__title">{props.title}</h2>
+              <p className="movies-card__subtitle">{props.subtitle}</p>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <>
+          {!isDelete ? (
+            <section className="movies-card">
+              <>
                 <button
-                  className="movies-card__saved"
+                  className="movies-card__delete"
                   onClick={() => {
                     moviesState
-                      .updateLikedMoviesIds(movie)
-                      .then(() => setIsSaved(true));
+                      .deleteLikedMoviesIds(movie)
+                      .then(() => setIsSaved(false), setIsDelete(true));
                   }}
                 >
-                  Save
+                  X
                 </button>
-              )
-            ) : (
-              <button
-                className="movies-card__delete"
-                onClick={() => {
-                  moviesState
-                    .deleteLikedMoviesIds(movie)
-                    .then(() => setIsSaved(false), setIsDelete(true));
-                }}
-              >
-                X
-              </button>
-            )}
-            <div className="movies-card__container">
-              <a
-                href={props.trailerLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  className="movies-img"
-                  src={props.url}
-                  alt={props.title}
-                ></img>
-              </a>
+                <div className="movies-card__container">
+                  <a
+                    href={props.trailerLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      className="movies-img"
+                      src={props.url}
+                      alt={props.title}
+                    ></img>
+                  </a>
 
-              <div className="movies-card__group">
-                <h2 className="movies-card__title">{props.title}</h2>
-                <p className="movies-card__subtitle">{props.subtitle}</p>
-              </div>
-            </div>
-          </section>
-        ) : (
-          // если карточка удалена, то скрываем ее
-          <section className="movies-card__hide"></section>
-        )
-      }
+                  <div className="movies-card__group">
+                    <h2 className="movies-card__title">{props.title}</h2>
+                    <p className="movies-card__subtitle">{props.subtitle}</p>
+                  </div>
+                </div>
+              </>
+            </section>
+          ) : null}
+        </>
+      )}
     </>
   );
 }
