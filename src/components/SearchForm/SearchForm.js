@@ -29,14 +29,14 @@ function SearchForm(props) {
     console.log(moviesState.movies.length);
   }
 
-  async function moviesStates() {
+  function moviesStates() {
     const searchInput = { line: search, isShort, isLiked };
     if (isLiked) {
-      await moviesState.searchMoviesLiked({
+      moviesState.searchMoviesLiked({
         search: searchInput,
       });
     } else {
-      await moviesState.searchMovies({
+      moviesState.searchMovies({
         search: searchInput,
         paging,
       });
@@ -46,16 +46,13 @@ function SearchForm(props) {
   function searchClick(e) {
     !e || e.preventDefault();
     setPreloaderStatus(true);
-    new Promise((res) => setTimeout(() => res("done"), 1000))
-      .then(() => moviesStates())
-      .finally(() => {
-        setPreloaderStatus(false);
-      });
-    // moviesStates()
-    // .finally(() => {
-    //   setPreloaderStatus(false);
-    //  });
+    moviesStates();
+    setPreloaderStatus(false);
   }
+  // moviesStates()
+  // .finally(() => {
+  //   setPreloaderStatus(false);
+  //  });
 
   return (
     <section className="search-form">

@@ -184,7 +184,7 @@ function App() {
           // if(localStorageSearch)
 
           setMoviesState((oldMovies) => {
-            if (moviesState.allMovies !== 0) {
+            if (moviesState.movies !== 0) {
               setPreloaderStatus(false);
             }
             const localStorageSearch = JSON.parse(
