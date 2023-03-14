@@ -34,7 +34,6 @@ function SearchForm(props) {
     if (isLiked) {
       await moviesState.searchMoviesLiked({
         search: searchInput,
-        paging,
       });
     } else {
       await moviesState.searchMovies({
