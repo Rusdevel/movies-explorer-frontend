@@ -204,15 +204,135 @@ function App() {
             //  все фильмы запишутся в allMovies
             return {
               ...oldMovies,
-
               allMovies: initialMovies,
-
               movies:
                 JSON.parse(localStorage.getItem("movies")) ||
                 oldMovies.movies ||
                 initialMovies,
+              searchMovies: async ({ search, paging }) => {
+                const { line, isShort, isLiked } = search;
+                setMoviesState((oldMoviesState) => {
+                  // делит карточки фильмов на страницы
+                  const { index, size } = paging;
+
+                  console.log(index * size);
+                  // if (moviesState.movies.length === 0) {
+                  // setPreloaderStatus(true);
+                  // }
+                  const newMoviesState = {
+                    ...oldMoviesState,
+                    search: search,
+                    movies: oldMoviesState.allMovies
+                      .filter((movie) => !isShort || movie.duration <= 40)
+                      .filter(
+                        (movie) =>
+                          //const targetMovie = movie.nameRU.toLowerCase();
+                          // показывает все фильмы по поиску
+                          movie.nameEN
+                            .toLowerCase()
+                            .includes(line.toLowerCase()) ||
+                          movie.nameRU
+                            .toLowerCase()
+                            .includes(line.toLowerCase())
+                      )
+                      .slice(0, index * size), // режет массив так как нам нужно
+
+                    // показывает сохраненные фильмы по поиску
+                  };
+                  // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
+                  const storage = localStorage.setItem(
+                    "movies",
+                    JSON.stringify(newMoviesState.movies)
+                  );
+                  localStorage.setItem("search", JSON.stringify(search));
+                  console.log(localStorage.getItem("search"));
+                  console.log(localStorage.getItem("movies"));
+                  console.log(search);
+
+                  if (newMoviesState.movies.length === 0) {
+                    console.log(JSON.stringify(search));
+                    //  localStorage.setItem("movies", JSON.stringify(search));
+                    // console.log(localStorage.setItem(localStorage.getItem('token')));
+                    //handlePopapMoviesNotFoundOpen();
+                    handlePopapMoviesNotFoundOpen();
+                  }
+
+                  return newMoviesState;
+                });
+                // если фильм в списке ненайден, то выдает ошибку
+              },
+
+              searchMoviesLiked: async ({ search }) => {
+                const { line, isShort, isLiked } = search;
+                setMoviesState((oldMoviesState) => {
+                  // делит карточки фильмов на страницы
+                  // const { index, size } = paging;
+
+                  // console.log(index * size);
+                  // if (moviesState.movies.length === 0) {
+                  // setPreloaderStatus(true);
+                  // }
+                  const newMoviesState = {
+                    ...oldMoviesState,
+                    search: search,
+
+                    // показывает сохраненные фильмы по поиску
+                    likedMovies: oldMoviesState.allLikedMovies
+
+                      .filter((movie) => !isShort || movie.duration <= 40)
+                      .filter(
+                        (movie) =>
+                          movie.nameEN
+                            .toLowerCase()
+                            .includes(line.toLowerCase()) ||
+                          movie.nameRU
+                            .toLowerCase()
+                            .includes(line.toLowerCase())
+                      ),
+                    //  .slice(0, index * size), // режет массив так как нам нужно
+                  };
+                  // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
+
+                  if (isLiked && newMoviesState.likedMovies.length === 0) {
+                    console.log(JSON.stringify(search));
+                    history.push("/notfoundmovie");
+                  }
+
+                  return newMoviesState;
+                });
+                // если фильм в списке ненайден, то выдает ошибку
+              },
+              updateLikedMoviesIds: (movie) => {
+                return api
+                  .saveMovie(movie)
+                  .then((data) => {
+                    setMoviesState((oldMoviesState) => {
+                      return {
+                        ...oldMoviesState,
+                        likedMovies: oldMoviesState.likedMovies.concat(data),
+                      };
+                    });
+                  })
+                  .catch((err) => {
+                    console.log(
+                      "Что то то пошло не так в лайке карточки" + err
+                    );
+                    // setAlertMessageWraper("Что-то пошло не так... попробуйте еще раз...");
+                  });
+              },
+
+              //удаление из Бд фильма который понравился
+              deleteLikedMoviesIds: (movie) => {
+                return api
+                  .deleteMovie(movie._id)
+                  .then(() => {
+                    moviesState.allLikedMovies.filter((c) => c !== movie);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              },
             };
-            //console.log(search);
           });
         })
         .catch((result) => console.log(`${result} при загрузке данных`));
