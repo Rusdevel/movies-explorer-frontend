@@ -295,7 +295,7 @@ function App() {
 
                   if (isLiked && newMoviesState.likedMovies.length === 0) {
                     console.log(JSON.stringify(search));
-                    history.push("/notfoundmovie");
+                    handlePopapMoviesNotFoundOpen();
                   }
 
                   return newMoviesState;
