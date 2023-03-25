@@ -49,10 +49,6 @@ function SearchForm(props) {
     moviesStates();
     setPreloaderStatus(false);
   }
-  // moviesStates()
-  // .finally(() => {
-  //   setPreloaderStatus(false);
-  //  });
 
   return (
     <section className="search-form">

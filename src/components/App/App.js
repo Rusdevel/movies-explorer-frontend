@@ -46,9 +46,6 @@ function App() {
         const { index, size } = paging;
 
         console.log(index * size);
-        // if (moviesState.movies.length === 0) {
-        // setPreloaderStatus(true);
-        // }
         const newMoviesState = {
           ...oldMoviesState,
           search: search,
@@ -56,8 +53,6 @@ function App() {
             .filter((movie) => !isShort || movie.duration <= 40)
             .filter(
               (movie) =>
-                //const targetMovie = movie.nameRU.toLowerCase();
-                // показывает все фильмы по поиску
                 movie.nameEN.toLowerCase().includes(line.toLowerCase()) ||
                 movie.nameRU.toLowerCase().includes(line.toLowerCase())
             )
@@ -76,10 +71,6 @@ function App() {
         console.log(search);
 
         if (newMoviesState.movies.length === 0) {
-          console.log(JSON.stringify(search));
-          //  localStorage.setItem("movies", JSON.stringify(search));
-          // console.log(localStorage.setItem(localStorage.getItem('token')));
-          //handlePopapMoviesNotFoundOpen();
           handlePopapMoviesNotFoundOpen();
         }
 
@@ -91,13 +82,6 @@ function App() {
     searchMoviesLiked: async ({ search }) => {
       const { line, isShort, isLiked } = search;
       setMoviesState((oldMoviesState) => {
-        // делит карточки фильмов на страницы
-        // const { index, size } = paging;
-
-        // console.log(index * size);
-        // if (moviesState.movies.length === 0) {
-        // setPreloaderStatus(true);
-        // }
         const newMoviesState = {
           ...oldMoviesState,
           search: search,
@@ -111,12 +95,9 @@ function App() {
                 movie.nameEN.toLowerCase().includes(line.toLowerCase()) ||
                 movie.nameRU.toLowerCase().includes(line.toLowerCase())
             ),
-          //  .slice(0, index * size), // режет массив так как нам нужно
         };
-        // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
 
         if (isLiked && newMoviesState.likedMovies.length === 0) {
-          console.log(JSON.stringify(search));
           history.push("/notfoundmovie");
         }
 
@@ -179,10 +160,6 @@ function App() {
           // данные фильмов
           console.log(initialMovies);
 
-          //const localStorageSearch = localStorage.getItem("search");
-          //const localStorageMovies = localStorage.getItem("movies");
-          // if(localStorageSearch)
-
           setMoviesState((oldMovies) => {
             if (moviesState.movies !== 0) {
               setPreloaderStatus(false);
@@ -216,9 +193,7 @@ function App() {
                   const { index, size } = paging;
 
                   console.log(index * size);
-                  // if (moviesState.movies.length === 0) {
-                  // setPreloaderStatus(true);
-                  // }
+
                   const newMoviesState = {
                     ...oldMoviesState,
                     search: search,
@@ -226,7 +201,6 @@ function App() {
                       .filter((movie) => !isShort || movie.duration <= 40)
                       .filter(
                         (movie) =>
-                          //const targetMovie = movie.nameRU.toLowerCase();
                           // показывает все фильмы по поиску
                           movie.nameEN
                             .toLowerCase()
@@ -240,20 +214,8 @@ function App() {
                     // показывает сохраненные фильмы по поиску
                   };
                   // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
-                  const storage = localStorage.setItem(
-                    "movies",
-                    JSON.stringify(newMoviesState.movies)
-                  );
-                  localStorage.setItem("search", JSON.stringify(search));
-                  console.log(localStorage.getItem("search"));
-                  console.log(localStorage.getItem("movies"));
-                  console.log(search);
 
                   if (newMoviesState.movies.length === 0) {
-                    console.log(JSON.stringify(search));
-                    //  localStorage.setItem("movies", JSON.stringify(search));
-                    // console.log(localStorage.setItem(localStorage.getItem('token')));
-                    //handlePopapMoviesNotFoundOpen();
                     handlePopapMoviesNotFoundOpen();
                   }
 
@@ -265,13 +227,6 @@ function App() {
               searchMoviesLiked: async ({ search }) => {
                 const { line, isShort, isLiked } = search;
                 setMoviesState((oldMoviesState) => {
-                  // делит карточки фильмов на страницы
-                  // const { index, size } = paging;
-
-                  // console.log(index * size);
-                  // if (moviesState.movies.length === 0) {
-                  // setPreloaderStatus(true);
-                  // }
                   const newMoviesState = {
                     ...oldMoviesState,
                     search: search,
@@ -289,12 +244,10 @@ function App() {
                             .toLowerCase()
                             .includes(line.toLowerCase())
                       ),
-                    //  .slice(0, index * size), // режет массив так как нам нужно
                   };
                   // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
 
                   if (isLiked && newMoviesState.likedMovies.length === 0) {
-                    console.log(JSON.stringify(search));
                     handlePopapMoviesNotFoundOpen();
                   }
 
@@ -336,23 +289,8 @@ function App() {
           });
         })
         .catch((result) => console.log(`${result} при загрузке данных`));
-      //console.log(localStorageSearch);
-      console.log(JSON.parse(localStorage.getItem("movies")));
-      console.log(moviesState.search);
     }
   }, [loggedIn]);
-
-  // React.useEffect(() => {
-  // setMoviesState((oldMoviesState) => {
-  //   console.log(JSON.stringify(oldMoviesState));
-  //  const newMoviesState = {
-  //   ...oldMoviesState,
-
-  // показывает сохраненные фильмы по поиску
-  //  };
-  //   return newMoviesState;
-  //  });
-  // });
 
   // обработка регистрации
   function register(name, email, password) {
@@ -373,8 +311,6 @@ function App() {
     auth
       .authorization(email, password)
       .then((data) => {
-        //localStorage.setItem("token", data.token);
-        // console.log(localStorage.getItem("token"));
         setUserEmail(email);
         setLoggedIn(true);
         history.push("/movies");
@@ -444,9 +380,6 @@ function App() {
     });
   }
 
-  //function hidden() {
-  // history.push('/error');
-  //};
   // проверка токена для допуска к фильмам
   const checkToken = React.useCallback(() => {
     auth
@@ -481,34 +414,7 @@ function App() {
           console.log("res err", err);
         });
     }
-    // } else {
-    //   // setLikedMoviesByServer([]);
-    // }
   }, [loggedIn]);
-  /*
-  useEffect(() => {
-    const tempArr = likedMoviesByServer.map((item) => {
-      return item.movieId;
-    });
-    setLikedMoviesIds(tempArr);
-  }, [likedMoviesByServer]);
-*/
-  // понравившиеся фильмы
-
-  /*api
-        .deleteLikedMovie(tempObj._id, token)
-        .then((data) => {
-          const tempArr = likedMoviesByServer.filter((item) => {
-            return item._id !== tempObj._id;
-          });
-
-          setLikedMoviesByServer(tempArr);
-        })
-        .catch((err) => {
-          setAlertMessageWraper("Что-то пошло не так... попробуйте еще раз...");
-          // console.log('deleteLikedMovie res err', err)
-        });
-    */
 
   //функция открытия попапа ошибки
   function handleNotFoundPopupOpen() {
