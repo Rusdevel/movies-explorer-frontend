@@ -16,6 +16,7 @@ import NotFound from "../NotFound/NotFound";
 import InfoTooltip from "../PopapComplate/InfoTooltip";
 import NotFoundMovie from "../NotFoundMovie/NotFoundMovie";
 import PopapMoviesNotFound from "../PopapMoviesNotFound/PopapMoviesNotFound";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
@@ -45,30 +46,22 @@ function App() {
         // делит карточки фильмов на страницы
         const { index, size } = paging;
 
-        console.log(index * size);
+        const moviesSearch = oldMoviesState.allMovies
+          .filter((movie) => !isShort || movie.duration <= 40)
+          .filter(
+            (movie) =>
+              movie.nameEN.toLowerCase().includes(line.toLowerCase()) ||
+              movie.nameRU.toLowerCase().includes(line.toLowerCase())
+          );
+
         const newMoviesState = {
           ...oldMoviesState,
           search: search,
-          movies: oldMoviesState.allMovies
-            .filter((movie) => !isShort || movie.duration <= 40)
-            .filter(
-              (movie) =>
-                movie.nameEN.toLowerCase().includes(line.toLowerCase()) ||
-                movie.nameRU.toLowerCase().includes(line.toLowerCase())
-            )
-            .slice(0, index * size), // режет массив так как нам нужно
-
+          movies: moviesSearch.slice(0, index * size), // режет массив так как нам нужно
+          hasMore: index * size < moviesSearch.length,
           // показывает сохраненные фильмы по поиску
         };
         // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
-        const storage = localStorage.setItem(
-          "movies",
-          JSON.stringify(newMoviesState.movies)
-        );
-        localStorage.setItem("search", JSON.stringify(search));
-        console.log(localStorage.getItem("search"));
-        console.log(localStorage.getItem("movies"));
-        console.log(search);
 
         if (newMoviesState.movies.length === 0) {
           handlePopapMoviesNotFoundOpen();
@@ -114,7 +107,7 @@ function App() {
           setMoviesState((oldMoviesState) => {
             return {
               ...oldMoviesState,
-              likedMovies: oldMoviesState.likedMovies.concat(data),
+              allLikedMovies: oldMoviesState.allLikedMovies.concat(data),
             };
           });
         })
@@ -144,13 +137,18 @@ function App() {
 
   // хуки значения попапа ошибки
   const [NotFoundPopupOpen, setNotFoundPopupOpen] = React.useState(false);
-
+  const { pathname } = useLocation();
+  const isLiked = pathname === "/saved-movies";
   React.useEffect(() => {
     if (loggedIn) {
-      const promises = [api.getUserInfo(), moviesApi.getInitialMovies()];
+      const promises = [
+        api.getUserInfo(),
+        moviesApi.getInitialMovies(),
+        api.getAllLikedMovie(),
+      ];
 
       Promise.all(promises)
-        .then(([userData, initialMovies]) => {
+        .then(([userData, initialMovies, allLikedMoviesData]) => {
           // данные профиля
           console.log(userData.data.name, userData.data.email);
           setCurrentUser({
@@ -159,24 +157,26 @@ function App() {
           });
           // данные фильмов
           console.log(initialMovies);
-
+          console.log(allLikedMoviesData);
+          localStorage.setItem(
+            "likedMovies",
+            JSON.stringify(allLikedMoviesData)
+          );
+          // localStorage.setItem("movies", JSON.stringify(moviesState.movies));
           setMoviesState((oldMovies) => {
             if (moviesState.movies !== 0) {
               setPreloaderStatus(false);
             }
-            const localStorageSearch = JSON.parse(
-              localStorage.getItem("search")
-            );
-            if (localStorageSearch !== null) {
-              moviesState.search = {
-                line: localStorageSearch.line,
-                isShort: localStorageSearch.isShort,
-                isLiked: localStorageSearch.isLiked,
-              };
-            }
-
-            console.log(localStorageSearch);
-            console.log(moviesState.search);
+            // const localStorageSearch = JSON.parse(
+            //   localStorage.getItem("search")
+            // );
+            // if (localStorageSearch !== null) {
+            //   moviesState.search = {
+            //     line: localStorageSearch.line,
+            //     isShort: localStorageSearch.isShort,
+            //     isLiked: localStorageSearch.isLiked,
+            //   };
+            // }
 
             //  все фильмы запишутся в allMovies
             return {
@@ -186,31 +186,28 @@ function App() {
                 JSON.parse(localStorage.getItem("movies")) ||
                 oldMovies.movies ||
                 initialMovies,
+              likedMovies: allLikedMoviesData,
               searchMovies: async ({ search, paging }) => {
                 const { line, isShort, isLiked } = search;
+
                 setMoviesState((oldMoviesState) => {
                   // делит карточки фильмов на страницы
                   const { index, size } = paging;
-
-                  console.log(index * size);
+                  const moviesSearch = oldMoviesState.allMovies
+                    .filter((movie) => !isShort || movie.duration <= 40)
+                    .filter(
+                      (movie) =>
+                        movie.nameEN
+                          .toLowerCase()
+                          .includes(line.toLowerCase()) ||
+                        movie.nameRU.toLowerCase().includes(line.toLowerCase())
+                    );
 
                   const newMoviesState = {
                     ...oldMoviesState,
                     search: search,
-                    movies: oldMoviesState.allMovies
-                      .filter((movie) => !isShort || movie.duration <= 40)
-                      .filter(
-                        (movie) =>
-                          // показывает все фильмы по поиску
-                          movie.nameEN
-                            .toLowerCase()
-                            .includes(line.toLowerCase()) ||
-                          movie.nameRU
-                            .toLowerCase()
-                            .includes(line.toLowerCase())
-                      )
-                      .slice(0, index * size), // режет массив так как нам нужно
-
+                    movies: moviesSearch.slice(0, index * size), // режет массив так как нам нужно
+                    hasMore: index * size < moviesSearch.length,
                     // показывает сохраненные фильмы по поиску
                   };
                   // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
@@ -218,7 +215,12 @@ function App() {
                   if (newMoviesState.movies.length === 0) {
                     handlePopapMoviesNotFoundOpen();
                   }
-
+                  //записываем данные поиска в хранилище
+                  localStorage.setItem("search", JSON.stringify(search));
+                  localStorage.setItem(
+                    "movies",
+                    JSON.stringify(newMoviesState.movies)
+                  );
                   return newMoviesState;
                 });
                 // если фильм в списке ненайден, то выдает ошибку
@@ -227,7 +229,7 @@ function App() {
               searchMoviesLiked: async ({ search }) => {
                 const { line, isShort, isLiked } = search;
                 setMoviesState((oldMoviesState) => {
-                  const newMoviesState = {
+                  const newMoviesLikeState = {
                     ...oldMoviesState,
                     search: search,
 
@@ -247,11 +249,11 @@ function App() {
                   };
                   // сохраняем в localStorage текст запроса, найденные фильмы и состояние переключателя короткометражек
 
-                  if (isLiked && newMoviesState.likedMovies.length === 0) {
+                  if (isLiked && newMoviesLikeState.likedMovies.length === 0) {
                     handlePopapMoviesNotFoundOpen();
                   }
 
-                  return newMoviesState;
+                  return newMoviesLikeState;
                 });
                 // если фильм в списке ненайден, то выдает ошибку
               },
@@ -262,7 +264,8 @@ function App() {
                     setMoviesState((oldMoviesState) => {
                       return {
                         ...oldMoviesState,
-                        likedMovies: oldMoviesState.likedMovies.concat(data),
+                        allLikedMovies:
+                          oldMoviesState.allLikedMovies.concat(data),
                       };
                     });
                   })
@@ -290,7 +293,7 @@ function App() {
         })
         .catch((result) => console.log(`${result} при загрузке данных`));
     }
-  }, [loggedIn]);
+  }, [pathname]);
 
   // обработка регистрации
   function register(name, email, password) {
@@ -434,6 +437,7 @@ function App() {
             loggedIn={loggedIn}
             component={Movies}
             moviesState={moviesState}
+            setMoviesState={setMoviesState}
             isPreloaderActive={isPreloaderActive}
             setPreloaderStatus={setPreloaderStatus}
             // updateLikedMoviesIds={updateLikedMoviesIds}
@@ -455,6 +459,7 @@ function App() {
             loggedIn={loggedIn}
             component={SavedMovies}
             moviesState={moviesState}
+            setMoviesState={setMoviesState}
             isPreloaderActive={isPreloaderActive}
             setPreloaderStatus={setPreloaderStatus}
             // updateLikedMoviesIds={updateLikedMoviesIds}

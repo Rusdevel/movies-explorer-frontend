@@ -8,12 +8,15 @@ function MoviesCard(props) {
   function handleToggleSaved() {
     setIsSaved(!isSaved);
   }
-
   const { pathname } = useLocation();
-  const { moviesState, movie } = props;
+  const { moviesState, movie, setMoviesState } = props;
   React.useEffect(() => {
-    setIsSaved(moviesState.likedMovies.some((m) => m.movieId === movie.id));
-  });
+    setIsSaved(moviesState.allLikedMovies.some((m) => m.movieId === movie.id));
+    setMoviesState({
+      ...moviesState,
+      likedMovies: moviesState.allLikedMovies,
+    });
+  }, [pathname]);
 
   return (
     <>

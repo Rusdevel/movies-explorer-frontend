@@ -19,7 +19,10 @@ function SavedMovies(props) {
         paging={paging}
       />
       {props.isPreloaderActive && <Preloader />}
-      <MoviesCardList moviesState={props.moviesState} />
+      <MoviesCardList
+        moviesState={props.moviesState}
+        setMoviesState={props.setMoviesState}
+      />
       <div className="movies-cardList__container"></div>
       <Footer />
     </main>

@@ -5,7 +5,15 @@ import { useLocation } from "react-router-dom";
 
 function MoviesCardList(props) {
   const { pathname } = useLocation();
-  const { moviesState } = props;
+  const { moviesState, setMoviesState } = props;
+
+  // React.useEffect(() => {
+  //   // if (!isLiked && storageSerch !== null) {
+  //   //   setSearch(storageSerch.line);
+  //   //   setShort(storageSerch.isShort);
+  //   moviesState;
+  //   // }
+  // }, [moviesState]);
   return (
     <section className="movies-cardList">
       <div className="movies-cardList__container">
@@ -22,6 +30,7 @@ function MoviesCardList(props) {
                       subtitle={movie.duration + " мин"}
                       movie={movie}
                       moviesState={moviesState}
+                      setMoviesState={setMoviesState}
                     />
                   );
                 })
@@ -37,6 +46,7 @@ function MoviesCardList(props) {
                     subtitle={likedMovie.duration + " мин"}
                     movie={likedMovie}
                     moviesState={moviesState}
+                    setMoviesState={setMoviesState}
                   />
                 );
               })
