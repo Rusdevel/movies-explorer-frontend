@@ -17,6 +17,9 @@ function MoviesCard(props) {
       likedMovies: moviesState.allLikedMovies,
     });
   }, [pathname]);
+  React.useEffect(() => {
+    setIsSaved(moviesState.allLikedMovies.some((m) => m.movieId === movie.id));
+  });
 
   return (
     <>
