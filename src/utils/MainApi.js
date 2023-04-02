@@ -51,6 +51,7 @@ class Api {
   }
   //удаление понравившегося фильма
   deleteMovie(movieId) {
+    console.log();
     return fetch(`${this._url}/movies/${movieId}`, {
       method: "DELETE",
       credentials: "include",

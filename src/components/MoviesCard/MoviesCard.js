@@ -10,16 +10,28 @@ function MoviesCard(props) {
   }
   const { pathname } = useLocation();
   const { moviesState, movie, setMoviesState } = props;
+  // React.useEffect(() => {
+
+  //   console.log(1);
+  // }, [moviesState]);
   React.useEffect(() => {
     setIsSaved(moviesState.allLikedMovies.some((m) => m.movieId === movie.id));
     setMoviesState({
       ...moviesState,
       likedMovies: moviesState.allLikedMovies,
     });
+
+    console.log(pathname);
   }, [pathname]);
-  React.useEffect(() => {
-    setIsSaved(moviesState.allLikedMovies.some((m) => m.movieId === movie.id));
-  });
+  // удаление из роута /movies
+  const deleteFromSaved = (id) => {
+    const movieToDelete = moviesState.allLikedMovies.find(
+      (m) => m.movieId === id
+    );
+    moviesState
+      .deleteLikedMoviesIds(movieToDelete)
+      .then(() => setIsSaved(false), setIsDelete(true));
+  };
 
   return (
     <>
@@ -29,7 +41,7 @@ function MoviesCard(props) {
             <button
               className="movies-card__saved-save_active"
               onClick={() => {
-                setIsSaved(false), setIsDelete(true);
+                deleteFromSaved(movie.id);
               }}
             />
           ) : (

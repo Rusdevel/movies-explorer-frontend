@@ -122,7 +122,14 @@ function App() {
       return api
         .deleteMovie(movie._id)
         .then(() => {
-          moviesState.allLikedMovies.filter((c) => c !== movie);
+          setMoviesState((oldMoviesState) => {
+            return {
+              ...oldMoviesState,
+              allLikedMovies: oldMoviesState.allLikedMovies.filter(
+                (c) => c !== movie
+              ),
+            };
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -282,7 +289,14 @@ function App() {
                 return api
                   .deleteMovie(movie._id)
                   .then(() => {
-                    moviesState.allLikedMovies.filter((c) => c !== movie);
+                    setMoviesState((oldMoviesState) => {
+                      return {
+                        ...oldMoviesState,
+                        allLikedMovies: oldMoviesState.allLikedMovies.filter(
+                          (c) => c._id !== movie._id
+                        ),
+                      };
+                    });
                   })
                   .catch((err) => {
                     console.log(err);
