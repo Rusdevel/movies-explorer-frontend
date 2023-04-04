@@ -1,71 +1,70 @@
 .movies-cardList {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .movies-cardList__container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 28px;
 }
 
 @media screen and (min-width: 768px) {
-    .movies-cardList__container {
-        margin-top: 68px;
-    }
+  .movies-cardList__container {
+    margin-top: 68px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
-    .movies-cardList__container {
-        margin-top: 59px;
-    }
+  .movies-cardList__container {
+    margin-top: 59px;
+  }
 }
 
 @media screen and (min-width: 768px) {
-    .movies-cardList__card {
-        display: grid;
-        grid-template-columns: repeat(2, 339px);
-        row-gap: 31px;
-        column-gap: 28px;
-    }
+  .movies-cardList__card {
+    display: grid;
+    grid-template-columns: repeat(2, 339px);
+    row-gap: 31px;
+    column-gap: 28px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
-    .movies-cardList__card {
-        grid-template-columns: repeat(3, 364px);
-        row-gap: 37px;
-        column-gap: 23px;
-    }
+  .movies-cardList__card {
+    grid-template-columns: repeat(3, 364px);
+    row-gap: 37px;
+    column-gap: 23px;
+  }
 }
 
 .movies-cardList__button {
-    background-color: #2F2F2F;
-    color: #FFFFFF;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 15px;
-    text-align: center;
-    padding: 0 0 0 0;
-    margin: 34px auto 91px auto;
-    max-width: 238px;
-    height: 36px;
-    border-radius: 6px;
-    cursor: pointer;
-    min-width: 238px;
-    border: 0;
-    
+  background-color: #2f2f2f;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  padding: 0 0 0 0;
+  margin: 34px auto 91px auto;
+  max-width: 238px;
+  height: 36px;
+  border-radius: 6px;
+  cursor: pointer;
+  min-width: 238px;
+  border: 0;
 }
 
 @media screen and (min-width: 768px) {
-    .movies-cardList__button {
-        min-width: 320px;
-        margin-top: 10px;
-    }
+  .movies-cardList__button {
+    min-width: 320px;
+    margin-top: 10px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
-    .movies-cardList__button {
-        margin-top: 9px;
-    }
+  .movies-cardList__button {
+    margin-top: 9px;
+  }
 }

@@ -1,44 +1,43 @@
 .navTab {
-   background-color: #272727;
-   min-width: 320px;
-   height: 66px;
+  background-color: #272727;
+  min-width: 320px;
+  height: 66px;
 }
 
-
 .navTab__link {
-    font-size: 11px;
-    line-height: 16px;
-    font-weight: 500;
-    color: #FFFFFF;
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 500;
+  color: #ffffff;
 }
 
 .navTab__container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 53px;
-margin: 0 auto;
-max-width: 216px;
-height: 66px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 53px;
+  margin: 0 auto;
+  max-width: 216px;
+  height: 66px;
 }
 
 @media screen and (min-width: 768px) {
-    .navTab {
-        min-width: 768px;
-    }
-    .navTab__link {
-        font-size: 13px;
-    }
-    .navTab__container {
-        max-width: 280px;
-    }
-    }
+  .navTab {
+    min-width: 768px;
+  }
+  .navTab__link {
+    font-size: 13px;
+  }
+  .navTab__container {
+    max-width: 280px;
+  }
+}
 
-    @media screen and (min-width: 1280px) {
-        .navTab {
-            min-width: 1280px;
-        }
-        .navTab__link {
-            font-size: 13px;
-        }
-        }
+@media screen and (min-width: 1280px) {
+  .navTab {
+    min-width: 1280px;
+  }
+  .navTab__link {
+    font-size: 13px;
+  }
+}
