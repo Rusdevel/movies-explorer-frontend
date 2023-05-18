@@ -11,7 +11,7 @@ function AboutMe() {
           </div>
           <div className="AboutMe__box">
             <h3 className="AboutMe__subtitle">Руслан</h3>
-            <p className="AboutMe__text">Фронтенд-разработчик, 26 лет</p>
+            <p className="AboutMe__text">Фронтенд-разработчик, 27 лет</p>
             <p className="AboutMe__text">
               Я родился и живу в Москве, закончил факультет логистики МАДИ. Я
               люблю ходить в походы, а ещё увлекаюсь спортом. С 2021 года
