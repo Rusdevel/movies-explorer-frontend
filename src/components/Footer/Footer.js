@@ -44,7 +44,7 @@ function Footer() {
               </li>
             </ul>
           </nav>
-          <p className="footer__copyright">&copy;2021</p>
+          <p className="footer__copyright">&copy;2023</p>
         </div>
       </div>
     </section>
